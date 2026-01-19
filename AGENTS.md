@@ -74,8 +74,7 @@ If you cannot merge or cannot verify the main branch shows the DONE marker, stop
 
 ## Build and tests
 - Build: Visual Studio MSBuild only.
-  - Do not run CMake. If `build\DropletAnalyzer.sln` is missing, stop and ask the user.
-  - & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\DropletAnalyzer.sln" /m /p:Configuration=Release
+  - & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" 
 - Tests: prefer headless tests (unit tests, CLI E2E).
 - GUI testing: only ask when GUI-facing; give exact steps and expected results; ask for pass/fail and screenshot on failure.
 - Evidence for PR: unit test command + pass result; performance claims include dataset, timings, and machine notes.
