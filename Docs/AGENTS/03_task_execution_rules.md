@@ -25,11 +25,11 @@ Example
 Every agent must claim a task with a sign marker.
 
 1. Claim
-   * SIGN agentXX ACTIVE task NN
+   * SIGN <branch-name> ACTIVE task NN
 2. Complete
-   * SIGN agentXX DONE task NN
+   * SIGN <branch-name> DONE task NN
 3. Blocked
-   * SIGN agentXX BLOCKED task NN reason short
+   * SIGN <branch-name> BLOCKED task NN reason short
 
 Place the marker in
 
