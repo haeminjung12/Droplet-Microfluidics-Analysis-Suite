@@ -4,6 +4,8 @@ project(DropletAnalyzer LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+enable_testing()
+
 # Set the module path for custom find modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -19,6 +21,7 @@ option(DROPLET_WITH_TIFF "Enable TIFF dependency" ON)
 option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" ON)
 option(DROPLET_WITH_NLOHMANN_JSON "Enable nlohmann/json dependency" ON)
 option(DROPLET_WITH_GTEST "Enable GoogleTest dependency" OFF)
+option(WITH_DCAM_SDK "Enable Hamamatsu DCAM-API SDK integration" OFF)
 
 if(DROPLET_WITH_QT6)
     include(FindQt6)
@@ -39,6 +42,11 @@ if(DROPLET_WITH_GTEST)
     include(FindGTest)
 endif()
 
+if(WITH_DCAM_SDK)
+    find_package(DCAM REQUIRED)
+    add_compile_definitions(WITH_DCAM_SDK)
+endif()
+
 # Set output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -54,7 +62,13 @@ endif()
 add_subdirectory(src)
 add_subdirectory(cli)
 
+add_test(
+    NAME cmake_cache_has_with_dcam_sdk_bool
+    COMMAND ${CMAKE_COMMAND}
+        -DCACHE_FILE=${CMAKE_BINARY_DIR}/CMakeCache.txt
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/cmake/verify_with_dcam_sdk_option.cmake
+)
+
 if(DROPLET_WITH_GTEST)
-    enable_testing()
     add_subdirectory(tests)
 endif()
