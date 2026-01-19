@@ -91,3 +91,4 @@ If you are confused, blocked, or see conflicting instructions, stop and follow:
 - Docs\AGENTS\01_workflow.md
 - Docs\AGENTS\02_build_and_tests.md
 - Docs\AGENTS\03_task_execution_rules.md
+- Docs\AGENTS\04_troubleshooting.md
