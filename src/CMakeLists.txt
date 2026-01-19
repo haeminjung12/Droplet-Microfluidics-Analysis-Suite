@@ -3,6 +3,7 @@
 # Create a static library from the source files in this directory
 add_library(libdroplet STATIC
     dummy.cpp
+    HashUtils.cpp
     logging.cpp
 )
 
@@ -37,4 +38,8 @@ if(DROPLET_WITH_SPDLOG)
     if(TARGET fmt::fmt)
         target_link_libraries(libdroplet PUBLIC fmt::fmt)
     endif()
+endif()
+
+if(MSVC)
+    target_link_libraries(libdroplet PUBLIC bcrypt)
 endif()
