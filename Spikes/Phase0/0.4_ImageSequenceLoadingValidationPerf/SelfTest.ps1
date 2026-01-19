@@ -44,6 +44,63 @@ $metadataProvider = {
     }
 }
 
+Write-Host "SelfTest: fast TIFF metadata parsing..."
+$dir0 = New-TempDirectory
+try {
+    $tiffPath = Join-Path $dir0 'synthetic.tif'
+    $fs = [System.IO.File]::Open($tiffPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None)
+    try {
+        $bw = New-Object System.IO.BinaryWriter($fs)
+        try {
+            # Minimal little-endian TIFF header + one IFD with width/height/bits-per-sample.
+            # Header: "II" 42, IFD offset = 8
+            $bw.Write([byte][char]'I')
+            $bw.Write([byte][char]'I')
+            $bw.Write([UInt16]42)
+            $bw.Write([UInt32]8)
+
+            # IFD at offset 8: 3 entries
+            $bw.Write([UInt16]3)
+
+            # Tag 256 (ImageWidth), Type 4 (LONG), Count 1, Value 2304
+            $bw.Write([UInt16]256)
+            $bw.Write([UInt16]4)
+            $bw.Write([UInt32]1)
+            $bw.Write([UInt32]2304)
+
+            # Tag 257 (ImageLength), Type 4 (LONG), Count 1, Value 2304
+            $bw.Write([UInt16]257)
+            $bw.Write([UInt16]4)
+            $bw.Write([UInt32]1)
+            $bw.Write([UInt32]2304)
+
+            # Tag 258 (BitsPerSample), Type 3 (SHORT), Count 1, Value 16 (stored in low 2 bytes of the 4-byte value field)
+            $bw.Write([UInt16]258)
+            $bw.Write([UInt16]3)
+            $bw.Write([UInt32]1)
+            $bw.Write([UInt16]16)
+            $bw.Write([UInt16]0)
+
+            # Next IFD offset = 0
+            $bw.Write([UInt32]0)
+        }
+        finally {
+            $bw.Dispose()
+        }
+    }
+    finally {
+        $fs.Dispose()
+    }
+
+    $meta = Get-TiffMetadataFast -Path $tiffPath
+    Assert-Equal 2304 $meta.WidthPx "Fast TIFF parser should read ImageWidth."
+    Assert-Equal 2304 $meta.HeightPx "Fast TIFF parser should read ImageLength."
+    Assert-Equal 16 $meta.BitDepth "Fast TIFF parser should read BitsPerSample."
+}
+finally {
+    Remove-Item -Recurse -Force $dir0
+}
+
 Write-Host "SelfTest: alphabetical ordering..."
 $dir1 = New-TempDirectory
 try {

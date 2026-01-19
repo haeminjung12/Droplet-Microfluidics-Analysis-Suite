@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory)][string] $Directory,
     [Parameter()][ValidateRange(1, [int]::MaxValue)][int] $SampleStride = 10,
+    [Parameter()][ValidateRange(0, [int]::MaxValue)][int] $MaxSamples = 0,
     [Parameter()][ValidateRange(1, [int]::MaxValue)][int] $CacheSize = 64,
     [Parameter()][ValidateRange(0, [int]::MaxValue)][int] $CacheSimRepeatLastN = 50,
     [Parameter()][ValidateRange(0, [int]::MaxValue)][int] $CacheSimLoops = 10
@@ -9,37 +10,6 @@ param(
 $ErrorActionPreference = 'Stop'
 
 Import-Module "$PSScriptRoot/ImageSequencePerf.psm1" -Force
-
-function Get-TiffMetadataViaSystemDrawing {
-    param([Parameter(Mandatory)][string] $Path)
-
-    Add-Type -AssemblyName WindowsBase | Out-Null
-    Add-Type -AssemblyName PresentationCore | Out-Null
-
-    $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
-    try {
-        $decoder = New-Object System.Windows.Media.Imaging.TiffBitmapDecoder(
-            $stream,
-            [System.Windows.Media.Imaging.BitmapCreateOptions]::DelayCreation,
-            [System.Windows.Media.Imaging.BitmapCacheOption]::OnDemand
-        )
-
-        if ($decoder.Frames.Count -lt 1) {
-            throw "TIFF contains no frames."
-        }
-
-        $frame = $decoder.Frames[0]
-        return [pscustomobject]@{
-            WidthPx  = $frame.PixelWidth
-            HeightPx = $frame.PixelHeight
-            BitDepth = $frame.Format.BitsPerPixel
-            Format   = 'tiff'
-        }
-    }
-    finally {
-        $stream.Dispose()
-    }
-}
 
 function Get-SimulatedLruCacheHitRate {
     param(
@@ -80,11 +50,17 @@ function Get-SimulatedLruCacheHitRate {
     }
 }
 
-$metadataProvider = { param([string] $Path) Get-TiffMetadataViaSystemDrawing -Path $Path }
+$metadataProvider = { param([string] $Path) Get-TiffMetadataFast -Path $Path }
 
-$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-$scan = Get-ImageSequenceScanResult -Directory $Directory -SampleStride $SampleStride -MetadataProvider $metadataProvider
-$stopwatch.Stop()
+$scanStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+$scanOnly = Get-ImageSequenceScanResult -Directory $Directory -SampleStride $SampleStride -MaxSamples 1
+$scanStopwatch.Stop()
+
+$sampleStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+$scan = Get-ImageSequenceScanResult -Directory $Directory -SampleStride $SampleStride -MaxSamples $MaxSamples -MetadataProvider $metadataProvider
+$sampleStopwatch.Stop()
+
+$totalSeconds = $scanStopwatch.Elapsed.TotalSeconds + $sampleStopwatch.Elapsed.TotalSeconds
 
 $frameCount = $scan.OrderedFiles.Count
 $sampleCount = $scan.SampledFiles.Count
@@ -94,7 +70,10 @@ Write-Host "ImageSequenceSource prototype (Phase 0.4)"
 Write-Host "Directory: $Directory"
 Write-Host "Frames found: $frameCount"
 Write-Host "Sample stride: $SampleStride (sampled $sampleCount)"
-Write-Host ("Scan+sort+sample time: {0:N3} s" -f ($stopwatch.Elapsed.TotalSeconds))
+Write-Host "Max samples: $MaxSamples (0 = unlimited)"
+Write-Host ("Scan+sort time (approx): {0:N3} s" -f ($scanStopwatch.Elapsed.TotalSeconds))
+Write-Host ("Sample+metadata time: {0:N3} s" -f ($sampleStopwatch.Elapsed.TotalSeconds))
+Write-Host ("Total time: {0:N3} s" -f $totalSeconds)
 Write-Host "Format consistency: $([bool]$scan.FormatConsistency.IsConsistent) (mismatches: $mismatchCount)"
 
 if ($mismatchCount -gt 0) {
@@ -102,15 +81,24 @@ if ($mismatchCount -gt 0) {
     $first = $scan.FormatConsistency.Mismatches | Select-Object -First 1
     Write-Host "  Index: $($first.Index)"
     Write-Host "  Path:  $($first.Path)"
-    Write-Host "  Diffs: $($first.Differences.Keys -join ', ')"
+    if ($first.Error) {
+        Write-Host "  Error: $($first.Error)"
+    }
+    else {
+        Write-Host "  Diffs: $($first.Differences.Keys -join ', ')"
+    }
 }
 
 if ($frameCount -gt 0) {
     $accessPattern = New-Object System.Collections.Generic.List[int]
-    $accessPattern.AddRange((0..($frameCount - 1)))
+    for ($i = 0; $i -lt $frameCount; $i += 1) {
+        $accessPattern.Add($i)
+    }
     $repeatStart = [Math]::Max(0, $frameCount - $CacheSimRepeatLastN)
     for ($loop = 0; $loop -lt $CacheSimLoops; $loop += 1) {
-        $accessPattern.AddRange(($repeatStart..($frameCount - 1)))
+        for ($i = $repeatStart; $i -lt $frameCount; $i += 1) {
+            $accessPattern.Add($i)
+        }
     }
 
     $cacheSim = Get-SimulatedLruCacheHitRate -FrameCount $frameCount -Capacity $CacheSize -AccessPattern $accessPattern.ToArray()
@@ -119,5 +107,5 @@ if ($frameCount -gt 0) {
 
 [pscustomobject]@{
     ScanResult = $scan
-    Seconds    = $stopwatch.Elapsed.TotalSeconds
+    Seconds    = $totalSeconds
 }
