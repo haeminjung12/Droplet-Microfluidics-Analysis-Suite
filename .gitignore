@@ -6,6 +6,7 @@
 !/build/TimeUtilsTests/
 !/build/TimeUtilsTests/TimeUtilsTests.vcxproj
 !/build/TimeUtilsTests/TimeUtilsTests.cpp
+/out/
 /trash/
 /Prototypes/**/out/
 droplet_analyzer.log
