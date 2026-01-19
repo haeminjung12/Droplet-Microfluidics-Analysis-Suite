@@ -42,7 +42,7 @@ Required sequence:
 1. Create a branch from main.
    - Pattern: vk/<id>-task-<NN>-<short-topic>
 2. Add the SIGN ... ACTIVE marker under the chosen task in Docs\TODO.md.
-   - [SIGN <branch-name> ACTIVE task NN]
+   - SIGN <branch-name> ACTIVE task NN
 3. Commit and push the claim branch.
 4. Open a PR and merge it into main immediately (claim-only change).
 5. Confirm the claim is visible on GitHub at:
@@ -66,7 +66,7 @@ If you cannot merge or cannot verify the main branch shows the claim, stop and a
 5. Update Docs\TODO.md for completion:
    - Change the task checkbox from [ ] to [x].
    - Replace the ACTIVE marker with this line directly under the task entry (before the verification bullet):
-     - pSIGN <branch-name> DONE task NN[
+     - SIGN <branch-name> DONE task NN
 6. Merge the PR and confirm the DONE marker and [x] are visible on main at:
    - https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite/blob/main/Docs/TODO.md
 
@@ -74,7 +74,9 @@ If you cannot merge or cannot verify the main branch shows the DONE marker, stop
 
 ## Build and tests
 - Build: Visual Studio MSBuild only.
-  - & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" 
+  - Use x64 (some projects are not configured for Win32).
+  - If you hit `MSB8020` about toolset `v180`, retarget the project(s) to the installed toolset (currently `v145`).
+  - & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\DropletAnalyzer.sln" /m /p:Configuration=Release /p:Platform=x64
 - Tests: prefer headless tests (unit tests, CLI E2E).
 - GUI testing: only ask when GUI-facing; give exact steps and expected results; ask for pass/fail and screenshot on failure.
 - Evidence for PR: unit test command + pass result; performance claims include dataset, timings, and machine notes.

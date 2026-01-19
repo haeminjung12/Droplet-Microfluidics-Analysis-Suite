@@ -7,6 +7,7 @@ add_executable(droplet_analyzer_tests
     math_utils_tests.cpp
     progress_callback_tests.cpp
     smoke_tests.cpp
+    time_utils_tests.cpp
 )
 
 target_link_libraries(droplet_analyzer_tests
