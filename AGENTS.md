@@ -72,10 +72,8 @@ Commit message format
 You may only work on one item at a time.
 
 When the user says `go`
-1. Find the next unchecked item in `Docs/TODO.md` on `origin/main` that is not claimed by another agent (do not rely on a potentially stale working tree copy)
-2. Claim it (and merge that claim to `main` so other agents can see it)
-3. Implement the test for that item
-4. Implement only enough code to make that test pass
+1. Make sure that everything is merged correctly
+2. End the session.
 
 Rules
 - Do not combine items
