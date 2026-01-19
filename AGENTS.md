@@ -204,14 +204,11 @@ If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIM
 ## Merge procedure with user gate
 
 1. Ask the user
-2. Only merge after the user types `go`
-3. Mark PR ready (if draft): `gh pr ready <pr_number>`
-4. Merge: `gh pr merge <pr_number> --merge`
+2. Mark PR ready (if draft): `gh pr ready <pr_number>`
+3. Merge: `gh pr merge <pr_number> --merge`
    - If branch deletion fails due to a local worktree constraint, delete manually:
      - `git push origin --delete <branch>`
      - `git checkout --detach origin/main` then `git branch -D <branch>`
-
-Note: The only exception to the user `go` merge gate is the claim-only PR (step 5 in Start of work procedure) that updates `Docs/TODO.md` so other agents can see the claim.
 
 ## Cleanup after merge
 
