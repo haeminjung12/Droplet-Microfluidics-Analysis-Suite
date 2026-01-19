@@ -118,8 +118,8 @@ Quick links
 18. [x] Implement `HashUtils` for SHA-256 hashing of files and configurations.
     SIGN vk/a40d-task-18-hashutils DONE task 18
     -   **Verification:** A unit test computes the SHA-256 hash of a known test file (`test_file.txt` with "hello world") and asserts the output matches the pre-computed hash `b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9`. Another test computes the hash of a known JSON string.
-19. [ ] Implement `TimeUtils` for timestamp handling.
-    SIGN vk/9115-task-19-timeutils ACTIVE task 19
+19. [x] Implement `TimeUtils` for timestamp handling.
+    SIGN vk/9115-task-19-timeutils DONE task 19
     -   **Verification:** A unit test provides a `frame_index` of 100 and an `fps_manual` of 50.0, and asserts that `TimeUtils::inferredTimestamp(100, 50.0)` returns `2.0`. Additional tests cover edge cases like 0 FPS.
 20. [ ] Implement `MathUtils` for geometric calculations (circularity, etc.).
     [SIGN vk/da74-task-20-mathutils ACTIVE task 20]
