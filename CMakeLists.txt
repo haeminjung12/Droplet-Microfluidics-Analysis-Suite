@@ -21,7 +21,7 @@ option(DROPLET_WITH_OPENCV "Enable OpenCV dependency" ON)
 option(DROPLET_WITH_TIFF "Enable TIFF dependency" ON)
 option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" OFF)
 option(DROPLET_WITH_NLOHMANN_JSON "Enable nlohmann/json dependency" ON)
-option(DROPLET_WITH_GTEST "Enable GoogleTest dependency" OFF)
+option(DROPLET_WITH_GTEST "Enable GoogleTest dependency" ON)
 
 if(DROPLET_WITH_QT6)
     include(FindQt6)
@@ -56,9 +56,9 @@ endif()
 # Add subdirectories
 add_subdirectory(src)
 add_subdirectory(cli)
-# add_subdirectory(tests) # Add when tests are available
 
-if(BUILD_TESTING)
+if(BUILD_TESTING AND DROPLET_WITH_GTEST)
+    add_subdirectory(tests)
     add_test(
         NAME build_droplet_analyzer_tests_target
         COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target droplet_analyzer_tests --config $<CONFIG>
