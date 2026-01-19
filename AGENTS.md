@@ -72,14 +72,15 @@ Commit message format
 You may only work on one item at a time.
 
 When the user says `go`
-1. Find the next unchecked item in `Docs/TODO.md` that is not claimed by another agent
+1. Find the next unchecked item in `Docs/TODO.md` on `origin/main` that is not claimed by another agent (do not rely on a potentially stale working tree copy)
 2. Claim it (and merge that claim to `main` so other agents can see it)
 3. Implement the test for that item
 4. Implement only enough code to make that test pass
 
 Rules
 - Do not combine items
-- If blocked, leave it unchecked and add a short blocker note under it, then move to the next unchecked item
+- NEVER move on to the next task without the user's explicit instruction.
+- If blocked or if there is any conflict (task ownership/claims, git conflicts, or process ambiguity), stop and confirm with the user before proceeding.
 
 ## Task claiming so agents can work in parallel
 Before starting work, an agent must claim exactly one TODO item so other agents can move on.
@@ -118,11 +119,20 @@ Example
 - `agent02/todo_droplet_tracker_autotune`
 
 ## Start of work procedure
-1. Sync with `origin/main` (worktree-safe)
-   - This repo may have `main` checked out in another worktree. Prefer syncing via fetch and branching from `origin/main`.
-   - `git fetch origin`
+1. Sync your local view of `origin/main` and the TODO list (worktree-safe)
+   - This repo may have `main` checked out in another worktree. Prefer syncing via fetch and branching from `origin/main` (not local `main`).
+   - `git fetch origin --prune`
+   - Review the up-to-date TODO directly from `origin/main`:
+     - `git show origin/main:Docs/TODO.md | Out-Host -Paging`
+   - PowerShell footgun fixes (add new fixes here in `AGENTS.md` as soon as you discover them so other agents don't repeat the work):
+     - Backtick is an escape character, so prefer single-quoted patterns (or omit Markdown backticks).
+     - Use `Get-Content <path> | ForEach-Object -Begin { $i=1 } -Process { "{0,5}: {1}" -f $i++, $_ }` instead of `nl`.
+   - Optional: update local `main` only if it is available in your worktree:
+     - `git switch main`
+     - `git pull --ff-only origin main`
 
-2. Select the next unclaimed unchecked item in `Docs/TODO.md`
+2. Select the next unclaimed unchecked item from `origin/main:Docs/TODO.md`
+   - If your working tree `Docs/TODO.md` differs from `origin/main:Docs/TODO.md`, treat the `origin/main` version as canonical for claiming.
 
 3. Create a short-lived claim branch from `origin/main`
    - `git checkout -b agent_id/claim_task_slug origin/main`
