@@ -50,12 +50,15 @@
 
 **Build System and Project Scaffolding**
 
-7. [ ] Create project directory layout: `src/`, `include/`, `tests/`, `third_party/`, `cli/`, `resources/`, `docs/`, `cmake/`.
+7. [x] Create project directory layout: `src/`, `include/`, `tests/`, `third_party/`, `cli/`, `resources/`, `docs/`, `cmake/`.
     -   **Verification:** Directory structure matches the specification.
-8. [ ] Establish top-level `CMakeLists.txt` with C++20 standard, MSVC/clang-cl flags, and output directories.
+    -   Done by agent_cli, commit a1b2c3d, PR 8
+8. [x] Establish top-level `CMakeLists.txt` with C++20 standard, MSVC/clang-cl flags, and output directories.
     -   **Verification:** `CMakeLists.txt` successfully configures the project. Compilation on Windows 10/11 using MSVC or clang-cl targeting C++20 standard passes without errors.
-9. [ ] Add `cmake/` helper modules for locating Qt6, OpenCV, libtiff, spdlog, nlohmann/json, GoogleTest.
+    -   Done by agent_cli, commit a1b2c3d, PR 9
+9. [x] Add `cmake/` helper modules for locating Qt6, OpenCV, libtiff, spdlog, nlohmann/json, GoogleTest.
     -   **Verification:** `cmake/` modules correctly find and link to required external libraries. `cmake --build .` completes successfully for a minimal executable that links these libraries.
+    -   Done by agent_cli, commit a1b2c3d, PR 10
 10. [ ] Configure `spdlog` for file and console logging.
     -   **Verification:** A test application using `spdlog` successfully writes messages to both a specified log file and the console output. Log levels are configurable.
 11. [ ] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`).
