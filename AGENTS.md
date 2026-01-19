@@ -10,7 +10,7 @@ This repo supports many parallel agents.
 
 ## Minimum reads before starting any task
 
-1. TODO.md
+1. Docs\TODO.md
 2. Docs\TECHSPEC_SPLIT\TECHSPEC_INDEX.md
 3. Docs\AGENTS\01_workflow.md
 
@@ -28,7 +28,7 @@ Build and testing rules live here
 
 ## Claim and close tasks
 
-Every agent must claim a task in TODO.md and in the PR description using the sign marker rules
+Every agent must claim a task in Docs\TODO.md and in the PR description using the sign marker rules
 
 - Docs\AGENTS\03_task_execution_rules.md
 
