@@ -68,7 +68,8 @@
 11. [x] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`).
     -   Done by agent11, commit e46a1e91558e59d5ee7ac3572e18f3386b94a6a5, PR 23
     -   **Verification:** A test build with `WITH_DCAM_SDK=OFF` successfully compiles, and the resulting binary does not contain any DCAM-related symbols. A separate test build with `WITH_DCAM_SDK=ON` (assuming SDK is present) successfully compiles and includes DCAM symbols.
-12. [ ] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`. [IN-PROGRESS: agent12]
+12. [x] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`.
+    -   Done by agent12, commit c3cf0c0, PR 22
     -   **Verification:** Running `cmake --build .` successfully generates `libdroplet.lib`, `DropletAnalyzer.exe`, and `droplet_analyzer_tests.exe` (or platform equivalents).
 
 **Core Interfaces and Data Models**
