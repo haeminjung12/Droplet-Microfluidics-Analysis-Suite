@@ -83,7 +83,7 @@
     -   **Verification:** Unit tests confirm that `Detection`, `FluorescenceMetrics`, `FrameDetections`, and `Track` structs can be instantiated, populated with data, and their members accessed correctly. Ensure `cv::Point2f` and `cv::Rect` are handled properly.
 16. [ ] Define `AnalysisResults` data structure to hold module outputs.
     -   **Verification:** A unit test instantiates `AnalysisResults`, populates it with dummy `FrameDetections` and `Track` data, and verifies data integrity.
-17. [ ] Define `ProgressCallback` `std::function` type.
+17. [ ] Define `ProgressCallback` `std::function` type. [IN-PROGRESS: agent17]
     -   **Verification:** A unit test defines a lambda function matching `ProgressCallback` signature, passes it to a dummy processing function, and verifies the callback is invoked with expected `current`, `total`, and `status` parameters.
 
 **Core Utilities**
