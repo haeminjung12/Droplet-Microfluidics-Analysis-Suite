@@ -1,4 +1,4 @@
-# AGENTS_V2
+# AGENTS
 
 This repo supports many parallel agents.
 
