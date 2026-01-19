@@ -48,7 +48,7 @@
 
 **Goal:** Create a UI-independent core library (`libdroplet`) that handles all data processing. Prove its functionality with comprehensive unit tests and a rudimentary command-line interface (CLI) for end-to-end testing.
 
-- [ ] **1.1: Build System and Project Scaffolding**
+- [ ] **1.1: Build System and Project Scaffolding** [IN-PROGRESS: agent03]
     - [ ] Create project directory layout: `src/`, `include/`, `tests/`, `third_party/`, `cli/`, `resources/`, `docs/`, `cmake/`.
         -   **Verification:** Directory structure matches the specification.
     - [ ] Establish top-level `CMakeLists.txt` with C++20 standard, MSVC/clang-cl flags, and output directories.
