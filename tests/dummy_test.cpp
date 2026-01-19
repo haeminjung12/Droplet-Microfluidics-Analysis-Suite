@@ -1,6 +1,7 @@
 #include "libdroplet.h"
 
-int main() {
-  return droplet::add(1, 2) == 3 ? 0 : 1;
-}
+#include <gtest/gtest.h>
 
+TEST(LibDropletAdd, AddsTwoIntegers) {
+  EXPECT_EQ(droplet::add(1, 2), 3);
+}
