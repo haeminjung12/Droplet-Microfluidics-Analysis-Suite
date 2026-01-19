@@ -13,10 +13,16 @@ target_link_libraries(droplet_analyzer_tests
 add_test(NAME droplet_analyzer_tests COMMAND droplet_analyzer_tests)
 
 set(vcpkg_bin_dir "${VCPKG_ROOT}/installed/x64-windows/bin")
+set(vcpkg_debug_bin_dir "${VCPKG_ROOT}/installed/x64-windows/debug/bin")
 if(EXISTS "${vcpkg_bin_dir}")
+    set(test_path_env "PATH=${vcpkg_bin_dir}\\;$ENV{PATH}")
+    if(EXISTS "${vcpkg_debug_bin_dir}")
+        set(test_path_env "PATH=${vcpkg_bin_dir}\\;${vcpkg_debug_bin_dir}\\;$ENV{PATH}")
+    endif()
+
     set_tests_properties(
         droplet_analyzer_tests
         PROPERTIES
-            ENVIRONMENT "PATH=${vcpkg_bin_dir};$ENV{PATH}"
+            ENVIRONMENT "${test_path_env}"
     )
 endif()
