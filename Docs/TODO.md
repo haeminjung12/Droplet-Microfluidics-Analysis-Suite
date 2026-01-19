@@ -62,7 +62,7 @@
     -   **Verification:** `cmake/` modules correctly find and link to required external libraries. `cmake --build .` completes successfully for a minimal executable that links these libraries.
     -   Done by haeminjung12, commit 454013e, PR 13
     -   Follow-up fixes: commits 63cd1b9, a67a8fc, PR 15 (merged as 900e562)
-10. [ ] Configure `spdlog` for file and console logging.
+10. [ ] Configure `spdlog` for file and console logging. [IN-PROGRESS: agent10]
     -   **Verification:** A test application using `spdlog` successfully writes messages to both a specified log file and the console output. Log levels are configurable.
 11. [ ] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`).
     -   **Verification:** A test build with `WITH_DCAM_SDK=OFF` successfully compiles, and the resulting binary does not contain any DCAM-related symbols. A separate test build with `WITH_DCAM_SDK=ON` (assuming SDK is present) successfully compiles and includes DCAM symbols.
