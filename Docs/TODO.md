@@ -24,11 +24,11 @@
     -   **Verification:** The existing pipeline connects, streams at 23.3 FPS (full frame, 2304x2304, 16-bit, 1 ms exposure), and sustains acquisition for 60 seconds with zero `DCAMERR_LOSTFRAME` errors.
     -   **Output:** `Docs/dcam_connectivity_streaming_test_qt_hama_gui.md`
     -   **Optional patch:** `Docs/patches/qt_hama_gui_log_lostframe.patch`
-    -   Done by agent02, commit e3aef80, PR TBD (user confirmed streaming test passed)
+    -   Done by agent02, commit 3afd7f4, PR TBD (user confirmed streaming test passed)
 - [x] **0.3: DCAM Settings Round-Trip Verification (Using Existing Assets)**
     -   **Task:** Use the existing `qt_hama_gui` camera controls to set and read back parameters (resolution, binning, ROI, FPS, exposure, gain, bit depth, trigger mode).
     -   **Verification:** Requested vs actual settings are logged and match within acceptable tolerances.
-    -   Done by agent02, commit e3aef80, PR TBD (user requested mark complete)
+    -   Done by agent02, commit b1c7739, PR TBD (user requested mark complete)
 - [ ] **0.4: Image Sequence Loading & Validation Performance Test**
     -   **Task:** Implement a prototype for `ImageSequenceSource` that scans a directory, sorts filenames alphabetically (no frame index parsing), and performs format consistency checks (sampling every 10th file). Focus on performance for large sequences.
     -   **Verification:** Using a test directory containing ~233 full-resolution TIFF files (2304x2304, 16-bit), the prototype completes directory scanning, sorting, and format consistency sampling in under 5 seconds. Log output includes total parse time and reported "cache hit rate" (simulated or actual) remains within acceptable bounds for an LRU cache.
