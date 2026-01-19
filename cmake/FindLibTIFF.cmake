@@ -1,2 +1,2 @@
 # FindLibTIFF.cmake
-find_package(LibTIFF REQUIRED)
+find_package(TIFF REQUIRED)

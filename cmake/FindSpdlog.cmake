@@ -1,2 +1,2 @@
 # FindSpdlog.cmake
-find_package(spdlog REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
