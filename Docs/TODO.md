@@ -14,10 +14,11 @@
 
 **Goal:** Proactively investigate and de-risk critical technical challenges before committing to the full development cycle. These are short, focused prototypes to confirm feasibility and performance.
 
-- [ ] **0.1: Camera Asset Inventory (qt_hama_gui)** [IN-PROGRESS: agent01]
+- [x] **0.1: Camera Asset Inventory (qt_hama_gui)**
     -   **Task:** Identify and list reusable camera assets from `qt_hama_gui` (controller, grabber, frame types, UI patterns) and their dependencies.
     -   **Verification:** Inventory includes source filenames, required Qt/DCAM SDK dependencies, and notes on UI elements to reuse.
     -   **Output:** `Docs/camera_asset_inventory_qt_hama_gui.md`
+    -   Done by agent01, commit 5c10c63, PR 1
 - [ ] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)**
     -   **Task:** Build/run the existing `qt_hama_gui` camera pipeline to connect to ORCA-Fusion and stream raw frames.
     -   **Verification:** The existing pipeline connects, streams at 23.3 FPS (full frame, 2304x2304, 16-bit, 1 ms exposure), and sustains acquisition for 60 seconds with zero `DCAMERR_LOSTFRAME` errors.
