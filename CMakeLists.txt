@@ -4,6 +4,9 @@ project(DropletAnalyzer LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Standard CTest option: BUILD_TESTING
+include(CTest)
+
 # Set the module path for custom find modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -54,3 +57,10 @@ endif()
 add_subdirectory(src)
 add_subdirectory(cli)
 # add_subdirectory(tests) # Add when tests are available
+
+if(BUILD_TESTING)
+    add_test(
+        NAME build_droplet_analyzer_tests_target
+        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target droplet_analyzer_tests --config $<CONFIG>
+    )
+endif()
