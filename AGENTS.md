@@ -4,6 +4,9 @@
 ## Goal
 Enable multiple agents to work in parallel on the same repo with low merge risk and predictable review.
 
+## Canonical spec note
+Technical_Specification_Sheet_V1.0.md is the same document as docs/TECHSPEC.md. Treat docs/TECHSPEC.md as the canonical path.
+
 ## Source of truth for process
 1. Always follow docs/TECHSPEC.md
 2. Reference TODO.md for workflow overview
@@ -69,13 +72,34 @@ Commit message format
 You may only work on one item at a time.
 
 When the user says `go`
-1. Find the next unchecked item in TODO.md
-2. Implement the test for that item
-3. Implement only enough code to make that test pass
+1. Find the next unchecked item in TODO.md that is not claimed by another agent
+2. Claim it
+3. Implement the test for that item
+4. Implement only enough code to make that test pass
 
 Rules
 - Do not combine items
 - If blocked, leave it unchecked and add a short blocker note under it, then move to the next unchecked item
+
+## Task claiming so agents can work in parallel
+Before starting work, an agent must claim exactly one TODO item so other agents can move on.
+
+Claim format in TODO.md
+- Append a claim tag to the end of the TODO line:
+  - `[IN-PROGRESS: agent_id]`
+
+Example
+- `- [ ] Add droplet ROI validator [IN-PROGRESS: agent02]`
+
+Claim rules
+1. Claim only one item at a time
+2. Do not claim an item already claimed
+3. If you stop working, remove your claim tag
+4. When the work is complete and the user confirms, replace the checkbox with checked and remove the claim tag
+
+Completion example
+- `- [x] Add droplet ROI validator`
+  - `Done by agent02, commit abc1234, PR 57`
 
 ## Parallel agent policy
 1. Each agent must use a unique agent id
@@ -94,13 +118,20 @@ Example
    `git checkout main`
    `git pull origin main`
 
-2. Create a new branch from main
+2. Select the next unclaimed unchecked item in TODO.md
+
+3. Claim it in TODO.md using the claim format above and commit that claim immediately
+   Commit message must be structural
+   - `structural: claim TODO item <task_slug>`
+
+4. Create a new branch from main
+   If the claim commit was made on the branch already, keep going. Otherwise create the branch first, then claim.
    `git checkout -b agent_id/task_slug`
 
-3. Open a PR from your branch into main
+5. Open a PR from your branch into main
    Create it immediately and mark as draft until ready
 
-4. Read docs/TECHSPEC.md and TODO.md again
+6. Read docs/TECHSPEC.md again
    Confirm the selected item matches the intended architecture
 
 ## Local workflow during work
@@ -125,7 +156,7 @@ Use **Visual Studio MSBuild only**. Do **not** search for other compilers or use
 Run from the repo root:
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" /m /p:Configuration=Release
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\droplet_pipeline.sln" /m /p:Configuration=Release
 ````
 
 # Dependencies (verify these directories exist)
@@ -173,7 +204,7 @@ Push once
 
 Only after the user confirms the work is complete
 
-1. Check the box for the exact TODO.md line that was worked on
+1. Check the box for the exact TODO.md line that was worked on and remove the claim tag
 2. Log completion under that line with
 
    * agent id
