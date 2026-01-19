@@ -1,6 +1,5 @@
-# tests/CMakeLists.txt
-
 add_executable(droplet_analyzer_tests
+    input_source_signatures_test.cpp
     logging_tests.cpp
     smoke_tests.cpp
 )
