@@ -161,6 +161,31 @@ Example
 - For all non-GUI behavior, tests must be runnable headlessly in CLI so they can run without user intervention.
 - When a change requires GUI testing, prompt the user to test the GUI. Specify exactly what to test and ask the user to report whether it passes.
 
+## Troubleshooting Claim Visibility
+If you have followed the "Start of work procedure" to claim a task, but your claim is not visible on github.com, follow these steps to troubleshoot the issue:
+
+1. **Verify Local Claim:**
+   - Run `git log --oneline --graph --decorate --all` to check if your local branch contains the claim commit. The commit message should be `structural: claim TODO item <task_slug>`.
+
+2. **Check for Unpushed Commits:**
+   - Run `git status` to see if your local branch is ahead of the remote branch. If it is, you may have unpushed commits.
+   - Run `git push` to push your changes to the remote branch.
+
+3. **Verify Pull Request Status:**
+   - Go to the GitHub repository and check if a pull request for your claim branch exists.
+   - If the pull request exists, check if it has been merged.
+   - If the pull request has not been created, you can create it manually using the `gh pr create` command as described in the "Start of work procedure".
+
+4. **Check for Merge Conflicts:**
+   - If the pull request has merge conflicts, you will need to resolve them before it can be merged.
+   - Follow the instructions on GitHub to resolve the conflicts.
+
+5. **Verify `main` Branch:**
+   - Once the pull request is merged, ensure your local `main` branch is up-to-date.
+   - Run `git checkout main` and `git pull origin main` to sync your local `main` branch with the remote.
+
+If you have followed all these steps and the claim is still not visible, ask for help.
+
 # Build
 
 Use **Visual Studio MSBuild only**. Do **not** search for other compilers or use non-VS toolchains.
