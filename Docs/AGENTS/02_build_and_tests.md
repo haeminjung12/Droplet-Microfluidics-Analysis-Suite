@@ -8,7 +8,7 @@ Do not run CMake. If `build\DropletAnalyzer.sln` is missing, stop and ask the us
 Run from repo root in PowerShell
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\DropletAnalyzer.sln" /m /p:Configuration=Release
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
 ```
 
 ## Tests
