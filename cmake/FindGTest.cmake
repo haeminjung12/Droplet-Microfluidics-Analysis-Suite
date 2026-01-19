@@ -1,2 +1,2 @@
 # FindGTest.cmake
-find_package(GTest REQUIRED)
+find_package(GTest CONFIG REQUIRED)
