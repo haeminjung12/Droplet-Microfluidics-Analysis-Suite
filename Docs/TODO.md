@@ -2,7 +2,7 @@
 
 **Project:** DropletAnalyzer: Microfluidics Image Processing & Analysis Suite
 **Version:** 1.0.0
-**Source Spec:** `Docs/TECHSPEC_V2.md` (diffed against `Docs/TECHSPEC_V1.md`)
+**Source Spec:** `Docs/TECHSPEC.md`
 
 ---
 
