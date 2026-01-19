@@ -27,6 +27,7 @@
    - Use your current branch name (output of `git branch --show-current`) as `<branch-name>`.
 4. Make the claim visible to other agents.
    - Push the branch and open a draft PR immediately after adding the ACTIVE marker.
+   - Merge into main so that it is visible to other agents.
    - Put the same marker line at the top of the PR description.
    - After this point, keep pushing restricted to completion (avoid frequent intermediate pushes).
 
