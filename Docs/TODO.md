@@ -121,8 +121,8 @@ Quick links
 19. [x] Implement `TimeUtils` for timestamp handling.
     SIGN vk/9115-task-19-timeutils DONE task 19
     -   **Verification:** A unit test provides a `frame_index` of 100 and an `fps_manual` of 50.0, and asserts that `TimeUtils::inferredTimestamp(100, 50.0)` returns `2.0`. Additional tests cover edge cases like 0 FPS.
-20. [ ] Implement `MathUtils` for geometric calculations (circularity, etc.).
-    [SIGN vk/da74-task-20-mathutils ACTIVE task 20]
+20. [x] Implement `MathUtils` for geometric calculations (circularity, etc.).
+    [SIGN vk/da74-task-20-mathutils DONE task 20]
     -   **Verification:** Unit tests for `MathUtils::calculateCircularity(area, perimeter)` with known values (e.g., perfect circle, elongated ellipse) assert the returned circularity is within a small epsilon of the expected value. Similarly for area, diameter, and aspect ratio.
 
 **Foundational Image Processing Algorithms (in `libdroplet`)**
