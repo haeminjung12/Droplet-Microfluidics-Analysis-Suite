@@ -201,6 +201,46 @@ If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIM
 - First push (publish branch): `git push -u origin HEAD`
 - Subsequent pushes (update PR): `git push` (only when needed / user requested)
 
+## Branch Management
+
+### Tracking Remote Branches
+
+It is crucial that your local branches track their remote counterparts on `origin`. This ensures that `git status` provides accurate information about whether your branch is ahead of, behind, or has diverged from the remote branch. Without a tracking relationship, your local branch is "invisible" to `git` in terms of its relationship with the remote repository.
+
+### Setting an Upstream Branch
+
+When you create a new local branch, it does not automatically track a remote branch. You must explicitly set the upstream branch when you first push it. The `Start of work procedure` already includes this step.
+
+The command to push a new branch and set its upstream is:
+
+`git push --set-upstream origin <branch-name>`
+
+You can also use the shorthand `-u` for `--set-upstream`:
+
+`git push -u origin <branch-name>`
+
+### Verifying Branch Tracking
+
+To check if your local branches are tracking remote branches, use the `-vv` flag with `git branch`:
+
+`git branch -vv`
+
+The output will show the tracking information in square brackets `[]` for each branch.
+
+**Example of a tracking branch:**
+`* my-feature-branch  a1b2c3d [origin/my-feature-branch] Add new feature`
+
+**Example of a non-tracking branch:**
+`* my-other-branch    e4f5g6h Another commit message`
+
+### Fixing a Non-Tracking Branch
+
+If you find a branch that is not tracking a remote counterpart (and it should be), you can fix it by pushing it and setting the upstream:
+
+`git push --set-upstream origin <branch-name>`
+
+This will create the branch on the remote `origin` if it doesn't exist and establish the tracking relationship.
+
 ## Merge procedure with user gate
 
 1. Ask the user
