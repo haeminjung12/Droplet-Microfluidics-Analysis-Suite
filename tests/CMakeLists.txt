@@ -4,6 +4,7 @@ add_executable(droplet_analyzer_tests
     hash_utils_tests.cpp
     input_source_signatures_test.cpp
     logging_tests.cpp
+    math_utils_tests.cpp
     progress_callback_tests.cpp
     smoke_tests.cpp
     time_utils_tests.cpp
