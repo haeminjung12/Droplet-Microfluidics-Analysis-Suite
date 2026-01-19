@@ -19,7 +19,7 @@
     -   **Verification:** Inventory includes source filenames, required Qt/DCAM SDK dependencies, and notes on UI elements to reuse.
     -   **Output:** `Docs/camera_asset_inventory_qt_hama_gui.md`
     -   Done by agent01, commit 5c10c63, PR 1
-- [ ] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)**
+- [ ] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)** [IN-PROGRESS: agent02]
     -   **Task:** Build/run the existing `qt_hama_gui` camera pipeline to connect to ORCA-Fusion and stream raw frames.
     -   **Verification:** The existing pipeline connects, streams at 23.3 FPS (full frame, 2304x2304, 16-bit, 1 ms exposure), and sustains acquisition for 60 seconds with zero `DCAMERR_LOSTFRAME` errors.
 - [ ] **0.3: DCAM Settings Round-Trip Verification (Using Existing Assets)**
