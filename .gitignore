@@ -2,6 +2,6 @@
 **/*.VC.db
 **/*.VC.VC.opendb
 /build/
-
+/trash/
 /Prototypes/**/out/
 
