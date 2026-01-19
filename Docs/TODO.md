@@ -62,7 +62,8 @@
     -   **Verification:** `cmake/` modules correctly find and link to required external libraries. `cmake --build .` completes successfully for a minimal executable that links these libraries.
     -   Done by haeminjung12, commit 454013e, PR 13
     -   Follow-up fixes: commits 63cd1b9, a67a8fc, PR 15 (merged as 900e562)
-10. [ ] Configure `spdlog` for file and console logging. [IN-PROGRESS: agent10]
+10. [x] Configure `spdlog` for file and console logging.
+    -   Done by agent10, commit 347fdd1, PR 20
     -   **Verification:** A test application using `spdlog` successfully writes messages to both a specified log file and the console output. Log levels are configurable.
 11. [ ] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`). [IN-PROGRESS: agent11]
     -   **Verification:** A test build with `WITH_DCAM_SDK=OFF` successfully compiles, and the resulting binary does not contain any DCAM-related symbols. A separate test build with `WITH_DCAM_SDK=ON` (assuming SDK is present) successfully compiles and includes DCAM symbols.
@@ -71,8 +72,9 @@
 
 **Core Interfaces and Data Models**
 
-13. [ ] Implement `InputSource` abstract base class (`include/InputSource.h`).
+13. [x] Implement `InputSource` abstract base class (`include/InputSource.h`).
     -   **Verification:** A derived dummy class can be instantiated and implements all pure virtual functions defined in `InputSource`. Unit tests ensure `getType()`, `getTotalFrames()`, `getFrame()`, and `getTimestamp()` signatures are correctly defined.
+    -   Done by agent13, commit d0d888a, PR 24
 14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`).
     -   **Verification:** A derived dummy class can be instantiated. Unit tests confirm `getName()`, `getDisplayName()`, `configure()`, `run()`, `createControlPanel()`, and `exportResults()` signatures are correctly defined.
 15. [ ] Define core data structures in `include/DataModels.h`: `Detection`, `FluorescenceMetrics`, `FrameDetections`, `Track`.
