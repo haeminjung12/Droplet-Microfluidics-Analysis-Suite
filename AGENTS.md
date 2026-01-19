@@ -97,6 +97,10 @@ Claim rules
 3. If you stop working, remove your claim tag
 4. When the work is complete and the user confirms, replace the checkbox with checked and remove the claim tag
 
+Claim visibility rule
+- A claim is not considered active until it has been merged into `main` (so it is visible to everyone on GitHub from the `main` branch view of `Docs/TODO.md`).
+- Do not start implementation work until the claim-only PR has been merged into `main`.
+
 Completion example
 - `- [x] Add droplet ROI validator`
   - `Done by agent02, commit abc1234, PR 57`
