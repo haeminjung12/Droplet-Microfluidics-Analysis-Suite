@@ -135,7 +135,11 @@ Example
 5. Merge the claim into `main` so other agents can see it immediately
    - `git push -u origin HEAD`
    - `gh pr create --title "structural: claim TODO <id> <task_slug>" --body "Agent: agent_id"`
-   - `gh pr merge <pr_number> --merge --delete-branch`
+   - `gh pr merge <pr_number> --merge`
+   - **Worktree note:** Avoid `gh pr merge --delete-branch` here; in multi-worktree setups it can fail with `fatal: 'main' is already used by worktree ...` because it tries to manipulate local branches during deletion.
+   - If you want to delete the claim branch after merge, do it manually:
+     - `git push origin --delete agent_id/claim_task_slug`
+     - `git checkout --detach origin/main` then `git branch -D agent_id/claim_task_slug`
 
 6. Create the work branch from updated `origin/main` and open a draft PR
    - `git fetch origin`
@@ -181,8 +185,11 @@ If you have followed the "Start of work procedure" to claim a task, but your cla
    - Follow the instructions on GitHub to resolve the conflicts.
 
 5. **Verify `main` Branch:**
-   - Once the pull request is merged, ensure your local `main` branch is up-to-date.
-   - Run `git checkout main` and `git pull origin main` to sync your local `main` branch with the remote.
+   - Once the pull request is merged, confirm `origin/main` contains the claim.
+   - **Worktree note:** Do not `git checkout main` in this worktree; `main` may be checked out in another worktree and Git will block it.
+   - Use:
+     - `git fetch origin`
+     - `git show origin/main:Docs/TODO.md` (verify your `[IN-PROGRESS: agent_id]` tag is visible)
 
 If you have followed all these steps and the claim is still not visible, ask for help.
 
@@ -190,9 +197,26 @@ If you have followed all these steps and the claim is still not visible, ask for
 
 Use **Visual Studio MSBuild only**. Do **not** search for other compilers or use non-VS toolchains.
 
+## Toolchain (no searching)
+Some environments do not have `cmake` on `PATH`. Use these fixed Visual Studio tool paths (do not recursively search for compilers/tools):
+- MSBuild: `C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe`
+- CMake: `C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe`
+- CTest: `C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe`
+
+## Make the compiler visible (recommended)
+Run in a Visual Studio Developer PowerShell session, or run this once per shell to put the MSVC compiler on `PATH` (no filesystem searching required):
+- `Import-Module "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"`
+- `Enter-VsDevShell -VsInstallPath "C:\Program Files\Microsoft Visual Studio\18\Community" -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"`
+
+## Build commands
 Run from the repo root:
 
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" /m /p:Configuration=Release
+1. Configure (generates `build/DropletAnalyzer.sln`):
+   - `& "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -S . -B build -G "Visual Studio 17 2022" -A x64 -DVCPKG_ROOT="C:/vcpkg"`
+2. Build:
+   - `& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\\DropletAnalyzer.sln" /m /p:Configuration=Release`
+3. Tests (if enabled/configured):
+   - `& "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" -C Release --output-on-failure`
 
 
 # Dependencies (verify these directories exist)
@@ -296,7 +320,10 @@ This is a required workflow step so `Docs/TODO.md` on `main` remains the single 
    - `git commit -m "structural: complete TODO item <task_slug>"`
    - `git push -u origin HEAD`
    - `gh pr create --title "structural: complete TODO <id> <task_slug>" --body "Agent: agent_id"`
-   - `gh pr merge <pr_number> --merge --delete-branch`
+   - `gh pr merge <pr_number> --merge`
+   - (Optional cleanup) If branch deletion fails due to a worktree constraint, delete manually:
+     - `git push origin --delete agent_id/complete_<task_slug>`
+     - `git checkout --detach origin/main` then `git branch -D agent_id/complete_<task_slug>`
 
 Example log line
 
