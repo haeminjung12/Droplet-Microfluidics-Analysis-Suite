@@ -16,7 +16,7 @@ endif()
 option(DROPLET_WITH_QT6 "Enable Qt6 GUI dependencies" OFF)
 option(DROPLET_WITH_OPENCV "Enable OpenCV dependency" ON)
 option(DROPLET_WITH_TIFF "Enable TIFF dependency" ON)
-option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" OFF)
+option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" ON)
 option(DROPLET_WITH_NLOHMANN_JSON "Enable nlohmann/json dependency" ON)
 option(DROPLET_WITH_GTEST "Enable GoogleTest dependency" OFF)
 
@@ -53,4 +53,8 @@ endif()
 # Add subdirectories
 add_subdirectory(src)
 add_subdirectory(cli)
-# add_subdirectory(tests) # Add when tests are available
+
+if(DROPLET_WITH_GTEST)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
