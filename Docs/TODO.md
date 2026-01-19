@@ -32,7 +32,7 @@
 - [ ] **0.4: Image Sequence Loading & Validation Performance Test**
     -   **Task:** Implement a prototype for `ImageSequenceSource` that scans a directory, sorts filenames alphabetically (no frame index parsing), and performs format consistency checks (sampling every 10th file). Focus on performance for large sequences.
     -   **Verification:** Using a test directory containing ~233 full-resolution TIFF files (2304x2304, 16-bit), the prototype completes directory scanning, sorting, and format consistency sampling in under 5 seconds. Log output includes total parse time and reported "cache hit rate" (simulated or actual) remains within acceptable bounds for an LRU cache.
-- [ ] **0.5: File Order & Uniform Timestamping Robustness**
+- [x] **0.5: File Order & Uniform Timestamping Robustness**
     -   **Task:** Validate that file order is alphabetical and timestamps are computed as `file_order_index / fps_manual`.
     -   **Verification:**
         -   **Ordering Test:** Provide filenames out of numeric order (e.g., `img_10.tif`, `img_2.tif`, `img_1.tif`) and assert the load order is alphabetical.
