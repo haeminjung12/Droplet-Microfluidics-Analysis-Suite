@@ -1,6 +1,7 @@
 add_executable(droplet_analyzer_tests
     input_source_signatures_test.cpp
     logging_tests.cpp
+    progress_callback_tests.cpp
     smoke_tests.cpp
 )
 
