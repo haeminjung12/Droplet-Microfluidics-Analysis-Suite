@@ -1,0 +1,99 @@
+diff --git a/dcam_controller.h b/dcam_controller.h
+--- a/dcam_controller.h
++++ b/dcam_controller.h
+@@
+ class DcamController : public QObject {
+     Q_OBJECT
+ public:
+@@
+ private:
+     QString errText(const QString& label, DCAMERR err) const;
+     HDCAM hdcam;
+     HDCAMWAIT hwait;
+     bool opened;
+     qint64 frameCounter;
++    std::atomic<qint64> lostFrameErrors;
+ };
+diff --git a/dcam_controller.cpp b/dcam_controller.cpp
+--- a/dcam_controller.cpp
++++ b/dcam_controller.cpp
+@@
+ DcamController::DcamController(QObject* parent)
+-    : QObject(parent), hdcam(nullptr), hwait(nullptr), opened(false), frameCounter(0) {}
++    : QObject(parent), hdcam(nullptr), hwait(nullptr), opened(false), frameCounter(0), lostFrameErrors(0) {}
+@@
+ QString DcamController::initAndOpen() {
+     cleanup();
++    lostFrameErrors = 0;
+     DCAMAPI_INIT api = {};
+     api.size = sizeof(api);
+@@
+ bool DcamController::lockLatestFrame(QImage& outImage, FrameMeta& meta) {
+     if (!opened) return false;
+ 
+     DCAMBUF_FRAME bf = {};
+     bf.size = sizeof(bf);
+     bf.iFrame = -1; // latest
+     DCAMERR err = dcambuf_lockframe(hdcam, &bf);
++    if (err == DCAMERR_LOSTFRAME) {
++        auto count = ++lostFrameErrors;
++        qWarning() << "DCAMERR_LOSTFRAME from dcambuf_lockframe. count=" << count;
++        return false;
++    }
+     if (failed(err)) return false;
+@@
+     if (!failed(dcamcap_transferinfo(hdcam, &ti))) {
+         meta.delivered = ti.nFrameCount;
+-        meta.dropped = 0;
++        meta.dropped = lostFrameErrors.load();
+     }
+*** End Patch"}]}Oops tool apply_patch expects patch format; my patch is file content addition with diff lines, so must prefix each with +. Use apply_patch with Add File lines. Let's reapply patch correctly. We'll need delete? It's added already? Wait tool returned error? Actually I mistakenly invoked apply_patch with JSON? The tool is FREEFORM; I passed JSON string; It will fail. Need check. We'll use apply_patch again with correct syntax to add file with + lines. Let's run. Let's see if file added or not. We'll check `git status`. We'll run shell. We'll fix. Let's call `git status --porcelain`. We'll do. (I made an incorrect tool call? It might not have executed due to invalid input; hasn't. We'll see). We'll run apply_patch again. But first check status. We'll run shell. We'll have to use semicolon not &&. We'll. Let's call. But note: my previous apply_patch call included JSON; system likely parse? It's executed? It says `commentary to=functions.apply_patch  ыҟоуп` but in analysis, I see invalid; let's check tool output? It's missing due to analysis. So we need actual. We'll run `git status`. We'll. Wait can't call tools in analysis; do in commentary. We'll do. (Note: It used JSON with patch as parameter; tool expects freeform. It likely fails in parser. We'll call status after to see. ) We'll call now. We'll use `functions.shell_command`. Let's. ួ for plan? We'll continue.
+diff --git a/dcam_controller.h b/dcam_controller.h
+--- a/dcam_controller.h
++++ b/dcam_controller.h
+@@
+ class DcamController : public QObject {
+     Q_OBJECT
+ public:
+@@
+ private:
+     QString errText(const QString& label, DCAMERR err) const;
+     HDCAM hdcam;
+     HDCAMWAIT hwait;
+     bool opened;
+     qint64 frameCounter;
++    std::atomic<qint64> lostFrameErrors;
+ };
+diff --git a/dcam_controller.cpp b/dcam_controller.cpp
+--- a/dcam_controller.cpp
++++ b/dcam_controller.cpp
+@@
+ DcamController::DcamController(QObject* parent)
+-    : QObject(parent), hdcam(nullptr), hwait(nullptr), opened(false), frameCounter(0) {}
++    : QObject(parent), hdcam(nullptr), hwait(nullptr), opened(false), frameCounter(0), lostFrameErrors(0) {}
+@@
+ QString DcamController::initAndOpen() {
+     cleanup();
++    lostFrameErrors = 0;
+     DCAMAPI_INIT api = {};
+     api.size = sizeof(api);
+@@
+ bool DcamController::lockLatestFrame(QImage& outImage, FrameMeta& meta) {
+     if (!opened) return false;
+ 
+     DCAMBUF_FRAME bf = {};
+     bf.size = sizeof(bf);
+     bf.iFrame = -1; // latest
+     DCAMERR err = dcambuf_lockframe(hdcam, &bf);
++    if (err == DCAMERR_LOSTFRAME) {
++        auto count = ++lostFrameErrors;
++        qWarning() << "DCAMERR_LOSTFRAME from dcambuf_lockframe. count=" << count;
++        return false;
++    }
+     if (failed(err)) return false;
+@@
+     if (!failed(dcamcap_transferinfo(hdcam, &ti))) {
+         meta.delivered = ti.nFrameCount;
+-        meta.dropped = 0;
++        meta.dropped = lostFrameErrors.load();
+     }
