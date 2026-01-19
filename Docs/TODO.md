@@ -128,6 +128,7 @@ Quick links
 **Foundational Image Processing Algorithms (in `libdroplet`)**
 
 21. [ ] Implement background subtraction modes: "None", "Static" (median), "Running" (exponential update).
+    [SIGN vk/a23f-task-21-background-subtraction ACTIVE task 21]
     -   **Verification:**
         -   **"None"**: Unit test runs background subtraction with "None" mode on a test image; output image is identical to input.
         -   **"Static"**: Unit test uses a synthetic image stack where a constant background is present over a moving foreground object. "Static" mode with N=50 frames should produce a clear background image (median) that accurately represents the constant background, subtracting the moving object.
