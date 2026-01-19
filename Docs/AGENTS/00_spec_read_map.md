@@ -9,7 +9,7 @@ Purpose
 
 Read these first
 
-1. TODO.md
+1. Docs/TODO.md
 2. Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md
 
 Read these only if your task needs them
@@ -52,4 +52,4 @@ Open only the files that match your task
 ## When requirements are missing
 
 - Add or refine requirements in Docs/TECHSPEC_SPLIT/13_open_questions.md
-- Then link the new note from TODO.md
+- Then link the new note from Docs/TODO.md
