@@ -123,6 +123,7 @@ Example
    - `git fetch origin --prune`
    - Review the up-to-date TODO directly from `origin/main`:
      - `git show origin/main:Docs/TODO.md | Out-Host -Paging`
+   - PowerShell footgun fixes: backtick is an escape character, so prefer single-quoted patterns (or omit Markdown backticks) and use `Get-Content <path> | ForEach-Object -Begin { $i=1 } -Process { "{0,5}: {1}" -f $i++, $_ }` instead of `nl`.
    - Optional: update local `main` only if it is available in your worktree:
      - `git switch main`
      - `git pull --ff-only origin main`
