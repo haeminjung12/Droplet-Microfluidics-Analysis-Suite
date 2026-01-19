@@ -2,6 +2,10 @@
 **/*.VC.db
 **/*.VC.VC.opendb
 /build/
+!/build/DropletAnalyzer.sln
+!/build/TimeUtilsTests/
+!/build/TimeUtilsTests/TimeUtilsTests.vcxproj
+!/build/TimeUtilsTests/TimeUtilsTests.cpp
 /trash/
 /Prototypes/**/out/
 droplet_analyzer.log
