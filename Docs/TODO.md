@@ -2,9 +2,32 @@
 
 **Project:** DropletAnalyzer: Microfluidics Image Processing & Analysis Suite
 **Version:** 1.0.0
-**Source Spec:** `Docs/TECHSPEC.md`
-
+**Source Spec:** `Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md`
 ---
+
+## Spec split reference
+
+Use these files for agent scoped context instead of the monolithic spec
+
+- Docs/TECHSPEC_SPLIT/00_overview.md
+- Docs/TECHSPEC_SPLIT/01_scope_objectives.md
+- Docs/TECHSPEC_SPLIT/02_system_architecture.md
+- Docs/TECHSPEC_SPLIT/03_functional_requirements.md
+- Docs/TECHSPEC_SPLIT/04_performance_benchmarks.md
+- Docs/TECHSPEC_SPLIT/05_fluorescence.md
+- Docs/TECHSPEC_SPLIT/06_data_formats.md
+- Docs/TECHSPEC_SPLIT/07_gui_requirements.md
+- Docs/TECHSPEC_SPLIT/08_dependencies_licensing.md
+- Docs/TECHSPEC_SPLIT/09_performance_usb_bandwidth.md
+- Docs/TECHSPEC_SPLIT/10_testing_validation.md
+- Docs/TECHSPEC_SPLIT/11_development_roadmap.md
+- Docs/TECHSPEC_SPLIT/12_deliverables.md
+- Docs/TECHSPEC_SPLIT/13_open_questions.md
+- Docs/TECHSPEC_SPLIT/14_success_criteria.md
+
+Quick links
+
+- Index and TOC: Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md
 
 **Camera scope note:** Camera control is already implemented in `C:\Users\goals\Codex\CNN for Droplet Sorting\cpp_pipeline_github\qt_hama_gui`. All camera work in this plan is integration and verification using those existing assets (e.g., `dcam_controller.*`, `frame_grabber.*`, `frame_types.h`, and UI patterns in `main.cpp`), not reimplementation.
 
@@ -171,6 +194,14 @@
 
 ## Phase 2: Basic GUI and Single-Image Modules
 
+Relevant spec
+
+- Docs/TECHSPEC_SPLIT/02_system_architecture.md
+- Docs/TECHSPEC_SPLIT/03_functional_requirements.md
+- Docs/TECHSPEC_SPLIT/05_fluorescence.md
+- Docs/TECHSPEC_SPLIT/06_data_formats.md
+- Docs/TECHSPEC_SPLIT/07_gui_requirements.md
+
 **Goal:** Build the main Qt application shell and implement the simpler, single-image analysis modules to validate the UI architecture and library integration.
 
 **Qt Application Skeleton**
@@ -235,6 +266,14 @@
 ---
 
 ## Phase 3: Advanced Offline Video Module
+
+Relevant spec
+
+- Docs/TECHSPEC_SPLIT/03_functional_requirements.md
+- Docs/TECHSPEC_SPLIT/04_performance_benchmarks.md
+- Docs/TECHSPEC_SPLIT/06_data_formats.md
+- Docs/TECHSPEC_SPLIT/07_gui_requirements.md
+- Docs/TECHSPEC_SPLIT/10_testing_validation.md
 
 **Goal:** Integrate the most complex offline feature: the video tracking module, with its full suite of UI controls and visualizations.
 
@@ -303,6 +342,14 @@
 
 ## Phase 4: Camera Module Integration (Reuse qt_hama_gui Assets)
 
+Relevant spec
+
+- Docs/TECHSPEC_SPLIT/02_system_architecture.md
+- Docs/TECHSPEC_SPLIT/03_functional_requirements.md
+- Docs/TECHSPEC_SPLIT/09_performance_usb_bandwidth.md
+- Docs/TECHSPEC_SPLIT/08_dependencies_licensing.md
+- Docs/TECHSPEC_SPLIT/10_testing_validation.md
+
 **Goal:** Integrate the existing Hamamatsu camera implementation into DropletAnalyzer (no reimplementation).
 
 **Camera Asset Integration**
@@ -341,6 +388,13 @@
 ---
 
 ## Phase 5: Final Validation, Documentation, and Release
+
+Relevant spec
+
+- Docs/TECHSPEC_SPLIT/10_testing_validation.md
+- Docs/TECHSPEC_SPLIT/12_deliverables.md
+- Docs/TECHSPEC_SPLIT/14_success_criteria.md
+- Docs/TECHSPEC_SPLIT/13_open_questions.md
 
 **Goal:** Finalize the application with comprehensive testing, documentation, and a distributable installer.
 
