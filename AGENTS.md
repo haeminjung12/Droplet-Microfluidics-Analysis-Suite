@@ -201,10 +201,7 @@ Run from the repo root:
 
   * `C:\vcpkg\installed\x64-windows\include\opencv4`
   * `C:\vcpkg\installed\x64-windows\bin`
-* ONNX Runtime (GPU build):
 
-  * `C:\onnxruntime-gpu\include`
-  * `C:\onnxruntime-gpu\lib`
 * Hamamatsu DCAM SDK:
 
   * `C:\Users\goals\Codex\CNN for Droplet Sorting\python_pipeline\Hamamatsu_DCAMSDK4_v25056964\dcamsdk4\inc`
