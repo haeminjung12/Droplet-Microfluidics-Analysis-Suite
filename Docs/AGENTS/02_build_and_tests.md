@@ -7,7 +7,7 @@ Use Visual Studio MSBuild only.
 Run from repo root in PowerShell
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\droplet_pipeline.sln" /m /p Configuration=Release
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" /m /p Configuration=Release
 ```
 
 ## Tests
