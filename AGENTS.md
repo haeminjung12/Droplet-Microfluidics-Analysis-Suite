@@ -97,6 +97,10 @@ Claim rules
 3. If you stop working, remove your claim tag
 4. When the work is complete and the user confirms, replace the checkbox with checked and remove the claim tag
 
+Claim visibility rule
+- A claim is not considered active until it has been merged into `main` (so it is visible to everyone on GitHub from the `main` branch view of `Docs/TODO.md`).
+- Do not start implementation work until the claim-only PR has been merged into `main`.
+
 Completion example
 - `- [x] Add droplet ROI validator`
   - `Done by agent02, commit abc1234, PR 57`
@@ -200,14 +204,11 @@ If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIM
 ## Merge procedure with user gate
 
 1. Ask the user
-2. Only merge after the user types `go`
-3. Mark PR ready (if draft): `gh pr ready <pr_number>`
-4. Merge: `gh pr merge <pr_number> --merge`
+2. Mark PR ready (if draft): `gh pr ready <pr_number>`
+3. Merge: `gh pr merge <pr_number> --merge`
    - If branch deletion fails due to a local worktree constraint, delete manually:
      - `git push origin --delete <branch>`
      - `git checkout --detach origin/main` then `git branch -D <branch>`
-
-Note: The only exception to the user `go` merge gate is the claim-only PR (step 5 in Start of work procedure) that updates `Docs/TODO.md` so other agents can see the claim.
 
 ## Cleanup after merge
 

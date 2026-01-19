@@ -37,7 +37,7 @@
     -   **Verification:**
         -   **Ordering Test:** Provide filenames out of numeric order (e.g., `img_10.tif`, `img_2.tif`, `img_1.tif`) and assert the load order is alphabetical.
         -   **Timing Test:** With FPS=23.3, assert timestamps are `0.0`, `1/23.3`, `2/23.3`, ... based on file order index, with no gap handling or index parsing.
-- [ ] **0.6: `FrameCache` Memory Management Test**
+- [ ] **0.6: `FrameCache` Memory Management Test** [IN-PROGRESS: agent04]
     -   **Task:** Implement a functional `FrameCache` (LRU) with a configurable memory budget.
     -   **Verification:** Configure the `FrameCache` with a 512 MB memory budget. Load frames (simulated or actual `cv::Mat` objects) exceeding this budget. Monitor allocated memory. Assert that the cache never exceeds its configured memory budget, and that the LRU eviction policy correctly removes the least recently used frames.
 
