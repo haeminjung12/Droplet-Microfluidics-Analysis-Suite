@@ -72,7 +72,7 @@ Commit message format
 You may only work on one item at a time.
 
 When the user says `go`
-1. Find the next unchecked item in `Docs/TODO.md` that is not claimed by another agent
+1. Find the next unchecked item in `Docs/TODO.md` on `origin/main` that is not claimed by another agent (do not rely on a potentially stale working tree copy)
 2. Claim it (and merge that claim to `main` so other agents can see it)
 3. Implement the test for that item
 4. Implement only enough code to make that test pass
@@ -118,11 +118,17 @@ Example
 - `agent02/todo_droplet_tracker_autotune`
 
 ## Start of work procedure
-1. Sync with `origin/main` (worktree-safe)
-   - This repo may have `main` checked out in another worktree. Prefer syncing via fetch and branching from `origin/main`.
-   - `git fetch origin`
+1. Sync your local view of `origin/main` and the TODO list (worktree-safe)
+   - This repo may have `main` checked out in another worktree. Prefer syncing via fetch and branching from `origin/main` (not local `main`).
+   - `git fetch origin --prune`
+   - Review the up-to-date TODO directly from `origin/main`:
+     - `git show origin/main:Docs/TODO.md | Out-Host -Paging`
+   - Optional: update local `main` only if it is available in your worktree:
+     - `git switch main`
+     - `git pull --ff-only origin main`
 
-2. Select the next unclaimed unchecked item in `Docs/TODO.md`
+2. Select the next unclaimed unchecked item from `origin/main:Docs/TODO.md`
+   - If your working tree `Docs/TODO.md` differs from `origin/main:Docs/TODO.md`, treat the `origin/main` version as canonical for claiming.
 
 3. Create a short-lived claim branch from `origin/main`
    - `git checkout -b agent_id/claim_task_slug origin/main`
