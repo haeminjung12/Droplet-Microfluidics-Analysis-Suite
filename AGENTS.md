@@ -167,9 +167,8 @@ Use **Visual Studio MSBuild only**. Do **not** search for other compilers or use
 
 Run from the repo root:
 
-```powershell
 & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\droplet_pipeline.sln" /m /p:Configuration=Release
-````
+
 
 # Dependencies (verify these directories exist)
 
