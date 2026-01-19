@@ -1,9 +1,23 @@
 # tests/CMakeLists.txt
 
-add_test(
-    NAME cmake_cache_has_with_dcam_sdk_bool
-    COMMAND ${CMAKE_COMMAND}
-        -DCACHE_FILE=${CMAKE_BINARY_DIR}/CMakeCache.txt
-        -P ${CMAKE_CURRENT_LIST_DIR}/cmake/verify_with_dcam_sdk_option.cmake
+add_executable(droplet_analyzer_tests
+    logging_tests.cpp
+    smoke_tests.cpp
 )
 
+target_link_libraries(droplet_analyzer_tests
+    PRIVATE
+        libdroplet
+        GTest::gtest_main
+)
+
+add_test(NAME droplet_analyzer_tests COMMAND droplet_analyzer_tests)
+
+set(vcpkg_bin_dir "${VCPKG_ROOT}/installed/x64-windows/bin")
+if(EXISTS "${vcpkg_bin_dir}")
+    set_tests_properties(
+        droplet_analyzer_tests
+        PROPERTIES
+            ENVIRONMENT "PATH=${vcpkg_bin_dir};$ENV{PATH}"
+    )
+endif()

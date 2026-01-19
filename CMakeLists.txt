@@ -18,7 +18,7 @@ endif()
 option(DROPLET_WITH_QT6 "Enable Qt6 GUI dependencies" OFF)
 option(DROPLET_WITH_OPENCV "Enable OpenCV dependency" ON)
 option(DROPLET_WITH_TIFF "Enable TIFF dependency" ON)
-option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" OFF)
+option(DROPLET_WITH_SPDLOG "Enable spdlog dependency" ON)
 option(DROPLET_WITH_NLOHMANN_JSON "Enable nlohmann/json dependency" ON)
 option(DROPLET_WITH_GTEST "Enable GoogleTest dependency" OFF)
 option(WITH_DCAM_SDK "Enable Hamamatsu DCAM-API SDK integration" OFF)
@@ -61,4 +61,14 @@ endif()
 # Add subdirectories
 add_subdirectory(src)
 add_subdirectory(cli)
-add_subdirectory(tests)
+
+add_test(
+    NAME cmake_cache_has_with_dcam_sdk_bool
+    COMMAND ${CMAKE_COMMAND}
+        -DCACHE_FILE=${CMAKE_BINARY_DIR}/CMakeCache.txt
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/cmake/verify_with_dcam_sdk_option.cmake
+)
+
+if(DROPLET_WITH_GTEST)
+    add_subdirectory(tests)
+endif()
