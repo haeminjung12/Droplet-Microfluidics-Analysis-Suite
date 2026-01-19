@@ -33,4 +33,8 @@ if(DROPLET_WITH_SPDLOG)
     elseif(TARGET spdlog::spdlog_header_only)
         target_link_libraries(libdroplet PUBLIC spdlog::spdlog_header_only)
     endif()
+
+    if(TARGET fmt::fmt)
+        target_link_libraries(libdroplet PUBLIC fmt::fmt)
+    endif()
 endif()

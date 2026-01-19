@@ -68,7 +68,8 @@
 11. [x] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`).
     -   Done by agent11, commit e46a1e91558e59d5ee7ac3572e18f3386b94a6a5, PR 23
     -   **Verification:** A test build with `WITH_DCAM_SDK=OFF` successfully compiles, and the resulting binary does not contain any DCAM-related symbols. A separate test build with `WITH_DCAM_SDK=ON` (assuming SDK is present) successfully compiles and includes DCAM symbols.
-12. [ ] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`. [IN-PROGRESS: agent12]
+12. [x] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`.
+    -   Done by agent12, commit c3cf0c0, PR 22
     -   **Verification:** Running `cmake --build .` successfully generates `libdroplet.lib`, `DropletAnalyzer.exe`, and `droplet_analyzer_tests.exe` (or platform equivalents).
 
 **Core Interfaces and Data Models**
@@ -78,11 +79,12 @@
     -   Done by agent13, commit d0d888a, PR 24
 14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`). [IN-PROGRESS: agent14]
     -   **Verification:** A derived dummy class can be instantiated. Unit tests confirm `getName()`, `getDisplayName()`, `configure()`, `run()`, `createControlPanel()`, and `exportResults()` signatures are correctly defined.
-15. [ ] Define core data structures in `include/DataModels.h`: `Detection`, `FluorescenceMetrics`, `FrameDetections`, `Track`.
+15. [x] Define core data structures in `include/DataModels.h`: `Detection`, `FluorescenceMetrics`, `FrameDetections`, `Track`.
     -   **Verification:** Unit tests confirm that `Detection`, `FluorescenceMetrics`, `FrameDetections`, and `Track` structs can be instantiated, populated with data, and their members accessed correctly. Ensure `cv::Point2f` and `cv::Rect` are handled properly.
-16. [ ] Define `AnalysisResults` data structure to hold module outputs.
+    -   Done by agent15, commit 5385fd9, PR 34
+16. [ ] Define `AnalysisResults` data structure to hold module outputs. [IN-PROGRESS: agent16]
     -   **Verification:** A unit test instantiates `AnalysisResults`, populates it with dummy `FrameDetections` and `Track` data, and verifies data integrity.
-17. [ ] Define `ProgressCallback` `std::function` type.
+17. [ ] Define `ProgressCallback` `std::function` type. [IN-PROGRESS: agent17]
     -   **Verification:** A unit test defines a lambda function matching `ProgressCallback` signature, passes it to a dummy processing function, and verifies the callback is invoked with expected `current`, `total`, and `status` parameters.
 
 **Core Utilities**

@@ -55,7 +55,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # MSVC specific flags
 if(MSVC)
     # Add warning flags
-    add_compile_options(/W4 /WX)
+    add_compile_options(/W4 /WX /utf-8)
 endif()
 
 # Add subdirectories
@@ -71,4 +71,8 @@ add_test(
 
 if(DROPLET_WITH_GTEST)
     add_subdirectory(tests)
+    add_test(
+        NAME build_droplet_analyzer_tests_target
+        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target droplet_analyzer_tests --config $<CONFIG>
+    )
 endif()
