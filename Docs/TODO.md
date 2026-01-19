@@ -14,7 +14,7 @@
 
 **Goal:** Proactively investigate and de-risk critical technical challenges before committing to the full development cycle. These are short, focused prototypes to confirm feasibility and performance.
 
-- [ ] **0.1: Camera Asset Inventory (qt_hama_gui)**
+- [ ] **0.1: Camera Asset Inventory (qt_hama_gui)** [IN-PROGRESS: agent01]
     -   **Task:** Identify and list reusable camera assets from `qt_hama_gui` (controller, grabber, frame types, UI patterns) and their dependencies.
     -   **Verification:** Inventory includes source filenames, required Qt/DCAM SDK dependencies, and notes on UI elements to reuse.
 - [ ] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)**
