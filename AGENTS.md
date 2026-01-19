@@ -29,7 +29,7 @@ You must follow this cycle every time
 3. Refactor
 
 ## Core development principles
-- Always follow the TDD cycle: Red → Green → Refactor
+- Always follow the TDD cycle: Red -> Green -> Refactor
 - Write the simplest failing test first
 - Implement the minimum code needed to make tests pass
 - Refactor only after tests are passing
@@ -73,7 +73,7 @@ You may only work on one item at a time.
 
 When the user says `go`
 1. Find the next unchecked item in `Docs/TODO.md` that is not claimed by another agent
-2. Claim it
+2. Claim it (and merge that claim to `main` so other agents can see it)
 3. Implement the test for that item
 4. Implement only enough code to make that test pass
 
@@ -106,7 +106,7 @@ Completion example
    Examples: agent01, agent02, agent03
 2. Each agent must work on only one selected item
 3. Each agent must create its own PR from main before doing work
-4. Do not touch another agent’s branch
+4. Do not touch another agent's branch
 
 Branch naming
 - `agent_id/task_slug`
@@ -118,20 +118,28 @@ Example
    - This repo may have `main` checked out in another worktree. Prefer syncing via fetch and branching from `origin/main`.
    - `git fetch origin`
 
-2. Create a new branch from `origin/main`
+2. Select the next unclaimed unchecked item in `Docs/TODO.md`
+
+3. Create a short-lived claim branch from `origin/main`
+   - `git checkout -b agent_id/claim_task_slug origin/main`
+
+4. Claim the item in `Docs/TODO.md` and commit immediately (structural)
+   - Append `[IN-PROGRESS: agent_id]` to the TODO line
+   - `git add Docs/TODO.md`
+   - `git commit -m "structural: claim TODO item <task_slug>"`
+
+5. Merge the claim into `main` so other agents can see it immediately
+   - `git push -u origin HEAD`
+   - `gh pr create --title "structural: claim TODO <id> <task_slug>" --body "Agent: agent_id"`
+   - `gh pr merge <pr_number> --merge --delete-branch`
+
+6. Create the work branch from updated `origin/main` and open a draft PR
+   - `git fetch origin`
    - `git checkout -b agent_id/task_slug origin/main`
-
-3. Select the next unclaimed unchecked item in `Docs/TODO.md`
-
-4. Claim it in `Docs/TODO.md` using the claim format above and commit that claim immediately
-   Commit message must be structural
-   - `structural: claim TODO item <task_slug>`
-
-5. Push your branch and open a draft PR immediately (so others can see your claim)
    - `git push -u origin HEAD`
    - `gh pr create --draft --title "TODO <id>: <short title>" --body "Agent: agent_id"`
 
-6. Read `Docs/TECHSPEC.md` again
+7. Read `Docs/TECHSPEC.md` again
    Confirm the selected item matches the intended architecture
 
 ## Local workflow during work
@@ -198,6 +206,8 @@ If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIM
    - If branch deletion fails due to a local worktree constraint, delete manually:
      - `git push origin --delete <branch>`
      - `git checkout --detach origin/main` then `git branch -D <branch>`
+
+Note: The only exception to the user `go` merge gate is the claim-only PR (step 5 in Start of work procedure) that updates `Docs/TODO.md` so other agents can see the claim.
 
 ## Cleanup after merge
 
