@@ -83,8 +83,9 @@
 15. [x] Define core data structures in `include/DataModels.h`: `Detection`, `FluorescenceMetrics`, `FrameDetections`, `Track`.
     -   **Verification:** Unit tests confirm that `Detection`, `FluorescenceMetrics`, `FrameDetections`, and `Track` structs can be instantiated, populated with data, and their members accessed correctly. Ensure `cv::Point2f` and `cv::Rect` are handled properly.
     -   Done by agent15, commit 5385fd9, PR 34
-16. [ ] Define `AnalysisResults` data structure to hold module outputs. [IN-PROGRESS: agent16]
+16. [x] Define `AnalysisResults` data structure to hold module outputs.
     -   **Verification:** A unit test instantiates `AnalysisResults`, populates it with dummy `FrameDetections` and `Track` data, and verifies data integrity.
+    -   Done by agent16, commit 287697e, PR 35
 17. [ ] Define `ProgressCallback` `std::function` type. [IN-PROGRESS: agent17]
     -   **Verification:** A unit test defines a lambda function matching `ProgressCallback` signature, passes it to a dummy processing function, and verifies the callback is invoked with expected `current`, `total`, and `status` parameters.
 
