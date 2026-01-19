@@ -218,12 +218,24 @@ If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIM
 
 Only after the user confirms the work is complete
 
-1. Check the box for the exact `Docs/TODO.md` line that was worked on and remove the claim tag
-2. Log completion under that line with
+This is a required workflow step so `Docs/TODO.md` on `main` remains the single source of truth for what is claimed vs done.
 
-   * agent id
-   * commit hash
-   * PR number
+1. Create a short-lived completion branch from `origin/main`
+   - `git fetch origin`
+   - `git checkout -b agent_id/complete_<task_slug> origin/main`
+2. Update `Docs/TODO.md` for the exact item you worked on
+   - Check the box (`[x]`)
+   - Remove the `[IN-PROGRESS: agent_id]` claim tag
+   - Log completion under that line with:
+     - agent id
+     - commit hash
+     - PR number
+3. Commit the completion update (structural) and merge it into `main`
+   - `git add Docs/TODO.md`
+   - `git commit -m "structural: complete TODO item <task_slug>"`
+   - `git push -u origin HEAD`
+   - `gh pr create --title "structural: complete TODO <id> <task_slug>" --body "Agent: agent_id"`
+   - `gh pr merge <pr_number> --merge --delete-branch`
 
 Example log line
 
