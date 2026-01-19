@@ -4,6 +4,7 @@
 add_library(libdroplet STATIC
     dummy.cpp
     HashUtils.cpp
+    TimeUtils.cpp
     logging.cpp
 )
 
