@@ -2,7 +2,7 @@
 
 **Project:** DropletAnalyzer: Microfluidics Image Processing & Analysis Suite
 **Version:** 1.0.0
-**Source Spec:** `Docs/TECHSPEC_V2.md` (diffed against `Docs/TECHSPEC_V1.md`)
+**Source Spec:** `Docs/TECHSPEC.md`
 
 ---
 
@@ -29,7 +29,7 @@
     -   **Task:** Use the existing `qt_hama_gui` camera controls to set and read back parameters (resolution, binning, ROI, FPS, exposure, gain, bit depth, trigger mode).
     -   **Verification:** Requested vs actual settings are logged and match within acceptable tolerances.
     -   Done by agent02, commit b1c7739, PR TBD (user requested mark complete)
-4. [ ] **Image Sequence Loading & Validation Performance Test**
+4. [x] **Image Sequence Loading & Validation Performance Test**
     -   **Task:** Implement a prototype for `ImageSequenceSource` that scans a directory, sorts filenames alphabetically (no frame index parsing), and performs format consistency checks (sampling every 10th file). Focus on performance for large sequences.
     -   **Verification:** Using a test directory containing ~233 full-resolution TIFF files (2304x2304, 16-bit), the prototype completes directory scanning, sorting, and format consistency sampling in under 5 seconds. Log output includes total parse time and reported "cache hit rate" (simulated or actual) remains within acceptable bounds for an LRU cache.
 5. [x] **File Order & Uniform Timestamping Robustness**
