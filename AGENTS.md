@@ -14,9 +14,13 @@ This repo supports many parallel agents.
 2. Docs\TECHSPEC_SPLIT\TECHSPEC_INDEX.md
 3. Docs\AGENTS\01_workflow.md
 
+After the minimum reads, do not do any task-specific investigation (repo search, opening code/spec files, etc.) until you have claimed the task in Docs\TODO.md using the sign marker rules.
+
+Before editing Docs\TODO.md, ensure it matches origin/main (see Docs\AGENTS\01_workflow.md). After claiming, make the TODO change visible to other agents (push/open PR per workflow).
+
 ## Pick task specific spec files
 
-Use the spec map to pick the 1 or 2 spec files relevant to your task
+Use the spec map to pick the 1 or 2 spec files relevant to the task
 
 - Docs\AGENTS\00_spec_read_map.md
 

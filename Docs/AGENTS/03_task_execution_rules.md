@@ -34,5 +34,13 @@ Every agent must claim a task with a sign marker.
 Place the marker in
 
 1. The PR description
-2. The TODO.md task entry
+2. The Docs/TODO.md task entry
+
+Additional rules
+
+1. You may only do the minimum reads before claiming.
+   * After that, any task-specific repo investigation (searching, opening code/spec files, etc.) requires an ACTIVE marker in `Docs/TODO.md` first.
+2. Keep `Docs/TODO.md` in sync and visible.
+   * Before editing `Docs/TODO.md`, ensure it matches `origin/main` (per `Docs/AGENTS/01_workflow.md`).
+   * After adding an ACTIVE marker, push/open a draft PR so other agents can see the claim.
 

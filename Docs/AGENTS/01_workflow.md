@@ -8,6 +8,7 @@
    - git fetch origin
    - git switch main
    - git pull --ff-only origin main
+   - If `git switch main` fails because `main` is checked out in another worktree, run the pull in that worktree instead, then return here and re-run `git fetch origin`.
 3. Verify Docs\TODO.md is up to date locally.
    - git diff --name-only origin/main -- Docs\TODO.md
    - This must output nothing.
@@ -19,22 +20,25 @@
 2. Create a branch from main.
    - Branch name pattern
      - agentXX_taskNN_short_topic
-3. In your first message in the PR description add a task marker.
-   - Use this exact marker
+3. Claim the task in Docs\TODO.md so other agents do not collide.
+   - Add this exact marker under the task entry
      - SIGN agentXX ACTIVE task NN
-4. Update Docs\TODO.md under that task with the same marker line so other agents do not collide.
+4. Make the claim visible to other agents.
+   - Push the branch and open a draft PR immediately after adding the ACTIVE marker.
+   - Put the same marker line at the top of the PR description.
+   - After this point, keep pushing restricted to completion (avoid frequent intermediate pushes).
 
 ## During work
 
 1. Keep changes scoped to the chosen task.
 2. Commit locally as needed.
-3. Do not push until the task is complete.
+3. Do not push code changes until the task is complete (the only exception is the initial claim push above).
 
 ## End of a task
 
 1. Run the required tests for your task.
-2. Push once.
-3. Open a PR.
+2. Push final changes.
+3. Mark the draft PR ready and update the description.
 4. In the PR description include
    - What you changed
    - How to test it
