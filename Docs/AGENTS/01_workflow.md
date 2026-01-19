@@ -1,6 +1,6 @@
 # Agent workflow
 
-## Preflight (must do before opening TODO.md)
+## Preflight (must do before opening Docs\TODO.md)
 
 1. Ensure your repo is clean.
    - No uncommitted changes.
@@ -8,21 +8,21 @@
    - git fetch origin
    - git switch main
    - git pull --ff-only origin main
-3. Verify TODO.md is up to date locally.
-   - git diff --name-only origin/main -- TODO.md
+3. Verify Docs\TODO.md is up to date locally.
+   - git diff --name-only origin/main -- Docs\TODO.md
    - This must output nothing.
-   - If it outputs TODO.md, repeat the pull step and recheck.
+   - If it outputs Docs\TODO.md, repeat the pull step and recheck.
 
 ## Start of a task
 
-1. Pick one task from TODO.md.
+1. Pick one task from Docs\TODO.md.
 2. Create a branch from main.
    - Branch name pattern
      - agentXX_taskNN_short_topic
 3. In your first message in the PR description add a task marker.
    - Use this exact marker
      - SIGN agentXX ACTIVE task NN
-4. Update TODO.md under that task with the same marker line so other agents do not collide.
+4. Update Docs\TODO.md under that task with the same marker line so other agents do not collide.
 
 ## During work
 
@@ -39,7 +39,7 @@
    - What you changed
    - How to test it
    - Evidence like log snippets and timings when relevant
-5. Remove the ACTIVE marker in TODO.md and replace it with
+5. Remove the ACTIVE marker in Docs\TODO.md and replace it with
    - SIGN agentXX DONE task NN
 
 ## Merge rules
