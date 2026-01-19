@@ -42,7 +42,7 @@ Required sequence:
 1. Create a branch from main.
    - Pattern: vk/<id>-task-<NN>-<short-topic>
 2. Add the SIGN ... ACTIVE marker under the chosen task in Docs\TODO.md.
-   - SIGN <branch-name> ACTIVE task NN
+   - [SIGN <branch-name> ACTIVE task NN]
 3. Commit and push the claim branch.
 4. Open a PR and merge it into main immediately (claim-only change).
 5. Confirm the claim is visible on GitHub at:
@@ -66,7 +66,7 @@ If you cannot merge or cannot verify the main branch shows the claim, stop and a
 5. Update Docs\TODO.md for completion:
    - Change the task checkbox from [ ] to [x].
    - Replace the ACTIVE marker with this line directly under the task entry (before the verification bullet):
-     - SIGN <branch-name> DONE task NN
+     - pSIGN <branch-name> DONE task NN[
 6. Merge the PR and confirm the DONE marker and [x] are visible on main at:
    - https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite/blob/main/Docs/TODO.md
 
