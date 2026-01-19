@@ -19,10 +19,12 @@
 1. Pick one task from Docs\TODO.md.
 2. Create a branch from main.
    - Branch name pattern
-     - agentXX_taskNN_short_topic
+     - vk/<id>-task-<NN>-<short-topic>
+     - Example: vk/205e-task-18-hashutils
 3. Claim the task in Docs\TODO.md so other agents do not collide.
    - Add this exact marker under the task entry
-     - SIGN agentXX ACTIVE task NN
+     - SIGN <branch-name> ACTIVE task NN
+   - Use your current branch name (output of `git branch --show-current`) as `<branch-name>`.
 4. Make the claim visible to other agents.
    - Push the branch and open a draft PR immediately after adding the ACTIVE marker.
    - Put the same marker line at the top of the PR description.
@@ -44,7 +46,7 @@
    - How to test it
    - Evidence like log snippets and timings when relevant
 5. Remove the ACTIVE marker in Docs\TODO.md and replace it with
-   - SIGN agentXX DONE task NN
+   - SIGN <branch-name> DONE task NN
 
 ## Merge rules
 
