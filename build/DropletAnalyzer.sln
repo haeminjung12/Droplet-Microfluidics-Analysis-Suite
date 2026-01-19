@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimeUtilsTests", "TimeUtilsTests\\TimeUtilsTests.vcxproj", "{9B28A305-5B55-4E35-8A27-6A1A0F4D7C2A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathUtilsTests", "MathUtilsTests\\MathUtilsTests.vcxproj", "{B0E41A16-AF84-4F95-AC9D-85C5C7B12E61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -14,6 +16,10 @@ Global
 		{9B28A305-5B55-4E35-8A27-6A1A0F4D7C2A}.Debug|x64.Build.0 = Debug|x64
 		{9B28A305-5B55-4E35-8A27-6A1A0F4D7C2A}.Release|x64.ActiveCfg = Release|x64
 		{9B28A305-5B55-4E35-8A27-6A1A0F4D7C2A}.Release|x64.Build.0 = Release|x64
+		{B0E41A16-AF84-4F95-AC9D-85C5C7B12E61}.Debug|x64.ActiveCfg = Debug|x64
+		{B0E41A16-AF84-4F95-AC9D-85C5C7B12E61}.Debug|x64.Build.0 = Debug|x64
+		{B0E41A16-AF84-4F95-AC9D-85C5C7B12E61}.Release|x64.ActiveCfg = Release|x64
+		{B0E41A16-AF84-4F95-AC9D-85C5C7B12E61}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
