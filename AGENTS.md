@@ -207,7 +207,7 @@ Run from the repo root:
   * `C:\Users\goals\Codex\CNN for Droplet Sorting\python_pipeline\Hamamatsu_DCAMSDK4_v25056964\dcamsdk4\inc`
   * `C:\Users\goals\Codex\CNN for Droplet Sorting\python_pipeline\Hamamatsu_DCAMSDK4_v25056964\dcamsdk4\lib\win64`
 
-If any of these differ on your machine, update the CMake cache (e.g. `ONNXRUNTIME_DIR` or `VCPKG_ROOT`) and reconfigure, but still build with MSBuild.
+If any of these differ on your machine, update the CMake cache (e.g. `VCPKG_ROOT`) and reconfigure, but still build with MSBuild.
 
 ## Finish procedure before pushing
 
