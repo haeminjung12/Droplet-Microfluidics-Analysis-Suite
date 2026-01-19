@@ -79,7 +79,8 @@ When the user says `go`
 
 Rules
 - Do not combine items
-- If blocked, leave it unchecked and add a short blocker note under it, then move to the next unchecked item
+- NEVER move on to the next task without the user's explicit instruction.
+- If blocked or if there is any conflict (task ownership/claims, git conflicts, or process ambiguity), stop and confirm with the user before proceeding.
 
 ## Task claiming so agents can work in parallel
 Before starting work, an agent must claim exactly one TODO item so other agents can move on.
@@ -123,7 +124,9 @@ Example
    - `git fetch origin --prune`
    - Review the up-to-date TODO directly from `origin/main`:
      - `git show origin/main:Docs/TODO.md | Out-Host -Paging`
-   - PowerShell footgun fixes: backtick is an escape character, so prefer single-quoted patterns (or omit Markdown backticks) and use `Get-Content <path> | ForEach-Object -Begin { $i=1 } -Process { "{0,5}: {1}" -f $i++, $_ }` instead of `nl`.
+   - PowerShell footgun fixes (add new fixes here in `AGENTS.md` as soon as you discover them so other agents don't repeat the work):
+     - Backtick is an escape character, so prefer single-quoted patterns (or omit Markdown backticks).
+     - Use `Get-Content <path> | ForEach-Object -Begin { $i=1 } -Process { "{0,5}: {1}" -f $i++, $_ }` instead of `nl`.
    - Optional: update local `main` only if it is available in your worktree:
      - `git switch main`
      - `git pull --ff-only origin main`
