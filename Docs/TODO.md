@@ -115,7 +115,7 @@ Quick links
 
 **Core Utilities**
 
-18. [ ] Implement `HashUtils` for SHA-256 hashing of files and configurations.
+18. [x] Implement `HashUtils` for SHA-256 hashing of files and configurations.
     SIGN vk/a40d-task-18-hashutils DONE task 18
     -   **Verification:** A unit test computes the SHA-256 hash of a known test file (`test_file.txt` with "hello world") and asserts the output matches the pre-computed hash `b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9`. Another test computes the hash of a known JSON string.
 19. [ ] Implement `TimeUtils` for timestamp handling.
