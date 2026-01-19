@@ -108,8 +108,9 @@ Quick links
     -   Done by agent15, commit 5385fd9, PR 34
 16. [ ] Define `AnalysisResults` data structure to hold module outputs. [IN-PROGRESS: agent16]
     -   **Verification:** A unit test instantiates `AnalysisResults`, populates it with dummy `FrameDetections` and `Track` data, and verifies data integrity.
-17. [ ] Define `ProgressCallback` `std::function` type. [IN-PROGRESS: agent17]
+17. [x] Define `ProgressCallback` `std::function` type.
     -   **Verification:** A unit test defines a lambda function matching `ProgressCallback` signature, passes it to a dummy processing function, and verifies the callback is invoked with expected `current`, `total`, and `status` parameters.
+    -   Done by agent17, commit 484c5be, PR 40
 
 **Core Utilities**
 
