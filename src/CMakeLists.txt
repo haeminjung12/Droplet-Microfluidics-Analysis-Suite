@@ -3,6 +3,7 @@
 # Create a static library from the source files in this directory
 add_library(libdroplet STATIC
     dummy.cpp
+    logging.cpp
 )
 
 # Publicly expose the include directory for other modules
