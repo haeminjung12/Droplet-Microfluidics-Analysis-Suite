@@ -63,8 +63,14 @@ If you cannot merge or cannot verify the main branch shows the claim, stop and a
 2. Push final changes.
 3. Mark the draft PR ready and update the description.
 4. In the PR description include: what changed, how to test, and evidence (logs/timings).
-5. Remove the ACTIVE marker in Docs\TODO.md and replace it with:
-   - SIGN <branch-name> DONE task NN
+5. Update Docs\TODO.md for completion:
+   - Change the task checkbox from [ ] to [x].
+   - Replace the ACTIVE marker with this line directly under the task entry (before the verification bullet):
+     - SIGN <branch-name> DONE task NN
+6. Merge the PR and confirm the DONE marker and [x] are visible on main at:
+   - https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite/blob/main/Docs/TODO.md
+
+If you cannot merge or cannot verify the main branch shows the DONE marker, stop and ask the user. Do not proceed.
 
 ## Build and tests
 - Build: Visual Studio MSBuild only.
