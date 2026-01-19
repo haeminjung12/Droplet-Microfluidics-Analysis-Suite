@@ -71,7 +71,7 @@
 
 **Core Interfaces and Data Models**
 
-13. [ ] Implement `InputSource` abstract base class (`include/InputSource.h`).
+13. [ ] Implement `InputSource` abstract base class (`include/InputSource.h`). [IN-PROGRESS: agent13]
     -   **Verification:** A derived dummy class can be instantiated and implements all pure virtual functions defined in `InputSource`. Unit tests ensure `getType()`, `getTotalFrames()`, `getFrame()`, and `getTimestamp()` signatures are correctly defined.
 14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`).
     -   **Verification:** A derived dummy class can be instantiated. Unit tests confirm `getName()`, `getDisplayName()`, `configure()`, `run()`, `createControlPanel()`, and `exportResults()` signatures are correctly defined.
