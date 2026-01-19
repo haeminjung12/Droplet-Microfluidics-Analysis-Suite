@@ -75,7 +75,7 @@
 13. [x] Implement `InputSource` abstract base class (`include/InputSource.h`).
     -   **Verification:** A derived dummy class can be instantiated and implements all pure virtual functions defined in `InputSource`. Unit tests ensure `getType()`, `getTotalFrames()`, `getFrame()`, and `getTimestamp()` signatures are correctly defined.
     -   Done by agent13, commit d0d888a, PR 24
-14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`).
+14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`). [IN-PROGRESS: agent14]
     -   **Verification:** A derived dummy class can be instantiated. Unit tests confirm `getName()`, `getDisplayName()`, `configure()`, `run()`, `createControlPanel()`, and `exportResults()` signatures are correctly defined.
 15. [ ] Define core data structures in `include/DataModels.h`: `Detection`, `FluorescenceMetrics`, `FrameDetections`, `Track`.
     -   **Verification:** Unit tests confirm that `Detection`, `FluorescenceMetrics`, `FrameDetections`, and `Track` structs can be instantiated, populated with data, and their members accessed correctly. Ensure `cv::Point2f` and `cv::Rect` are handled properly.
