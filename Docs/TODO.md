@@ -19,23 +19,28 @@
     -   **Verification:** Inventory includes source filenames, required Qt/DCAM SDK dependencies, and notes on UI elements to reuse.
     -   **Output:** `Docs/camera_asset_inventory_qt_hama_gui.md`
     -   Done by agent01, commit 5c10c63, PR 1
-- [ ] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)** [IN-PROGRESS: agent02]
+- [x] **0.2: DCAM Connectivity & Streaming Test (Using Existing Assets)**
     -   **Task:** Build/run the existing `qt_hama_gui` camera pipeline to connect to ORCA-Fusion and stream raw frames.
     -   **Verification:** The existing pipeline connects, streams at 23.3 FPS (full frame, 2304x2304, 16-bit, 1 ms exposure), and sustains acquisition for 60 seconds with zero `DCAMERR_LOSTFRAME` errors.
-- [ ] **0.3: DCAM Settings Round-Trip Verification (Using Existing Assets)**
+    -   **Output:** `Docs/dcam_connectivity_streaming_test_qt_hama_gui.md`
+    -   **Optional patch:** `Docs/patches/qt_hama_gui_log_lostframe.patch`
+    -   Done by agent02, commit 3afd7f4, PR TBD (user confirmed streaming test passed)
+- [x] **0.3: DCAM Settings Round-Trip Verification (Using Existing Assets)**
     -   **Task:** Use the existing `qt_hama_gui` camera controls to set and read back parameters (resolution, binning, ROI, FPS, exposure, gain, bit depth, trigger mode).
     -   **Verification:** Requested vs actual settings are logged and match within acceptable tolerances.
-- [ ] **0.4: Image Sequence Loading & Validation Performance Test** [IN-PROGRESS: agent03]
+    -   Done by agent02, commit b1c7739, PR TBD (user requested mark complete)
+- [ ] **0.4: Image Sequence Loading & Validation Performance Test**
     -   **Task:** Implement a prototype for `ImageSequenceSource` that scans a directory, sorts filenames alphabetically (no frame index parsing), and performs format consistency checks (sampling every 10th file). Focus on performance for large sequences.
     -   **Verification:** Using a test directory containing ~233 full-resolution TIFF files (2304x2304, 16-bit), the prototype completes directory scanning, sorting, and format consistency sampling in under 5 seconds. Log output includes total parse time and reported "cache hit rate" (simulated or actual) remains within acceptable bounds for an LRU cache.
-- [ ] **0.5: File Order & Uniform Timestamping Robustness**
+- [x] **0.5: File Order & Uniform Timestamping Robustness**
     -   **Task:** Validate that file order is alphabetical and timestamps are computed as `file_order_index / fps_manual`.
     -   **Verification:**
         -   **Ordering Test:** Provide filenames out of numeric order (e.g., `img_10.tif`, `img_2.tif`, `img_1.tif`) and assert the load order is alphabetical.
         -   **Timing Test:** With FPS=23.3, assert timestamps are `0.0`, `1/23.3`, `2/23.3`, ... based on file order index, with no gap handling or index parsing.
-- [ ] **0.6: `FrameCache` Memory Management Test**
+- [x] **0.6: `FrameCache` Memory Management Test**
     -   **Task:** Implement a functional `FrameCache` (LRU) with a configurable memory budget.
     -   **Verification:** Configure the `FrameCache` with a 512 MB memory budget. Load frames (simulated or actual `cv::Mat` objects) exceeding this budget. Monitor allocated memory. Assert that the cache never exceeds its configured memory budget, and that the LRU eviction policy correctly removes the least recently used frames.
+    -   Done by agent04, commit 747fce7, PR 6
 
 ---
 
