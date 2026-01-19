@@ -1,55 +1,45 @@
 # Spec read map
 
-Purpose
+Goal
 
-- Keep context small for each agent.
-- Avoid loading the original TECHSPEC.md.
+1. Keep context small.
+2. Avoid reading the full TECHSPEC.md.
 
-## Default reads for any task
-
-Read these first
+Default reads for any task
 
 1. Docs/TODO.md
 2. Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md
 
-Read these only if your task needs them
+Open only what your task needs
 
-- Docs/TECHSPEC_SPLIT/00_overview.md
-- Docs/TECHSPEC_SPLIT/02_system_architecture.md
-- Docs/TECHSPEC_SPLIT/10_testing_validation.md
+1. Data formats, sessions, hashing, export
+   1. Docs/TECHSPEC_SPLIT/06_data_formats.md
 
-## Task to spec file map
+2. Core algorithms and offline modules
+   1. Docs/TECHSPEC_SPLIT/03_functional_requirements.md
 
-Open only the files that match your task
+3. Fluorescence quantification
+   1. Docs/TECHSPEC_SPLIT/05_fluorescence.md
 
-- Data formats, sessions, hashing, export
-  - Docs/TECHSPEC_SPLIT/06_data_formats.md
+4. GUI, plotting, UX
+   1. Docs/TECHSPEC_SPLIT/07_gui_requirements.md
 
-- Core algorithms and offline modules
-  - Docs/TECHSPEC_SPLIT/03_functional_requirements.md
+5. Performance targets and bandwidth
+   1. Docs/TECHSPEC_SPLIT/04_performance_benchmarks.md
+   2. Docs/TECHSPEC_SPLIT/09_performance_usb_bandwidth.md
 
-- Fluorescence quantification
-  - Docs/TECHSPEC_SPLIT/05_fluorescence.md
+6. Dependencies, licensing, packaging
+   1. Docs/TECHSPEC_SPLIT/08_dependencies_licensing.md
 
-- GUI, plotting, UX
-  - Docs/TECHSPEC_SPLIT/07_gui_requirements.md
+7. Roadmap, deliverables, success criteria
+   1. Docs/TECHSPEC_SPLIT/11_development_roadmap.md
+   2. Docs/TECHSPEC_SPLIT/12_deliverables.md
+   3. Docs/TECHSPEC_SPLIT/14_success_criteria.md
 
-- Performance targets and bandwidth
-  - Docs/TECHSPEC_SPLIT/04_performance_benchmarks.md
-  - Docs/TECHSPEC_SPLIT/09_performance_usb_bandwidth.md
+8. Open questions and missing requirements
+   1. Docs/TECHSPEC_SPLIT/13_open_questions.md
 
-- Dependencies, licensing, packaging
-  - Docs/TECHSPEC_SPLIT/08_dependencies_licensing.md
+When requirements are missing
 
-- Roadmap, deliverables, success criteria
-  - Docs/TECHSPEC_SPLIT/11_development_roadmap.md
-  - Docs/TECHSPEC_SPLIT/12_deliverables.md
-  - Docs/TECHSPEC_SPLIT/14_success_criteria.md
-
-- Open questions and missing requirements
-  - Docs/TECHSPEC_SPLIT/13_open_questions.md
-
-## When requirements are missing
-
-- Add or refine requirements in Docs/TECHSPEC_SPLIT/13_open_questions.md
-- Then link the new note from Docs/TODO.md
+1. Add or refine requirements in Docs/TECHSPEC_SPLIT/13_open_questions.md
+2. Link the new note from Docs/TODO.md

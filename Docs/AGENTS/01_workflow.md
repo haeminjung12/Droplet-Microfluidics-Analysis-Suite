@@ -1,56 +1,136 @@
-# Agent workflow
+# Local Git workflow
 
-## Preflight (must do before opening Docs\TODO.md)
+Goal
 
-1. Ensure your repo is clean.
-   - No uncommitted changes.
-2. Sync with origin and fast forward main.
-   - git fetch origin
-   - git switch main
-   - git pull --ff-only origin main
-   - If `git switch main` fails because `main` is checked out in another worktree, run the pull in that worktree instead, then return here and re-run `git fetch origin`.
-3. Verify Docs\TODO.md is up to date locally.
-   - git diff --name-only origin/main -- Docs\TODO.md
-   - This must output nothing.
-   - If it outputs Docs\TODO.md, repeat the pull step and recheck.
+1. Keep claiming fast and local.
+2. Keep agents isolated.
 
-## Start of a task
+Concepts
 
-1. Pick one task from Docs\TODO.md.
-2. Create a branch from main.
-   - Branch name pattern
-     - vk/<id>-task-<NN>-<short-topic>
-     - Example: vk/205e-task-18-hashutils
-3. Claim the task in Docs\TODO.md so other agents do not collide.
-   - Add this exact marker under the task entry
-     - SIGN <branch-name> ACTIVE task NN
-   - Use your current branch name (output of `git branch --show-current`) as `<branch-name>`.
-4. Make the claim visible to other agents.
-   - Push the branch and open a draft PR immediately after adding the ACTIVE marker.
-   - Merge into main so that it is visible to other agents.
-   - Put the same marker line at the top of the PR description.
-   - After this point, keep pushing restricted to completion (avoid frequent intermediate pushes).
+1. A local bare repo acts as the shared origin for all agents.
+2. A master clone is used to sync with public GitHub and to create worktrees.
+3. Each agent works in its own worktree and branch.
+4. Agents push to the local origin main to publish claims and completed work locally.
+5. A separate orchestrator step pushes local main to public GitHub.
 
-## During work
+One time setup
 
-1. Keep changes scoped to the chosen task.
-2. Commit locally as needed.
-3. Do not push code changes until the task is complete (the only exception is the initial claim push above).
+1. Create a local bare origin
 
-## End of a task
+```bash
+git clone --bare https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite.git C:\repos\droplet-suite.origin
+```
 
-1. Run the required tests for your task.
-2. Push final changes.
-3. Mark the draft PR ready and update the description.
-4. In the PR description include
-   - What you changed
-   - How to test it
-   - Evidence like log snippets and timings when relevant
-5. Remove the ACTIVE marker in Docs\TODO.md and replace it with
-   - SIGN <branch-name> DONE task NN
+2. Create a master clone that uses the local origin
 
-## Merge rules
+```bash
+git clone C:\repos\droplet-suite.origin C:\repos\droplet-suite.master
+```
 
-1. One task per PR.
-2. No unrelated refactors.
-3. If you touched public headers then update or add unit tests.
+3. Add the public remote in the master clone
+
+```bash
+cd C:\repos\droplet-suite.master
+git remote add public https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite.git
+```
+
+Agent worktree creation
+
+Run in the master clone
+
+1. Sync master from public and publish to local origin
+
+```bash
+cd C:\repos\droplet-suite.master
+git fetch public
+git checkout main
+git pull --rebase public main
+git push origin main
+```
+
+2. Create a new worktree and branch
+
+```bash
+git worktree add C:\work\agent01 -b agent01_taskNN origin/main
+```
+
+Agent inner loop
+
+All commands run inside the agent worktree.
+
+1. Sync your branch to local main
+
+```bash
+git fetch origin
+git rebase origin/main
+```
+
+2. Claim a task
+
+1. Read Docs/TODO.md top to bottom.
+2. Pick the first unchecked task with no ACTIVE marker.
+3. Add a marker line under that task
+
+SIGN <your branch name> ACTIVE task NN
+
+4. Commit and push the claim to local origin main
+
+```bash
+git add Docs/TODO.md
+git commit -m "Docs claim task NN"
+git push origin HEAD:main
+```
+
+If push fails
+
+1. Another agent pushed first.
+2. Re sync and try again.
+
+```bash
+git fetch origin
+git rebase origin/main
+```
+
+If the rebase conflicts in Docs/TODO.md
+
+1. Abort.
+2. Re read Docs/TODO.md and pick a different task.
+
+```bash
+git rebase --abort
+```
+
+Task completion
+
+1. Commit your code changes on your branch.
+2. Update Docs/TODO.md with checkbox and DONE marker.
+3. Re sync then push the completed work to local origin main.
+
+```bash
+git fetch origin
+git rebase origin/main
+
+git add -A
+git commit -m "Task NN done"
+
+git push origin HEAD:main
+```
+
+Push to public GitHub
+
+Run in the master clone.
+
+```bash
+cd C:\repos\droplet-suite.master
+git checkout main
+git pull origin main
+git push public main
+```
+
+Cleanup
+
+Run in the master clone.
+
+```bash
+git worktree remove C:\work\agent01
+```

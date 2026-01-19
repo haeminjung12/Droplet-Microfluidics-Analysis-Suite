@@ -1,33 +1,41 @@
-﻿# Troubleshooting
+# Troubleshooting
 
-Use this when you are confused, blocked, or see conflicting instructions.
+If you are confused or blocked, stop and follow this order.
 
-## Immediate rule
-Stop and ask the user if you cannot resolve the issue from this file.
-Do not try multiple alternative approaches.
+1. Re read AGENTS.md and Docs/AGENTS/01_workflow.md.
+2. Run git fetch and check if origin main moved.
+3. Identify the failure class. Git conflict, build error, test failure.
 
-## Conflicting instructions
-- Follow the stricter rule.
-- If it is still unclear, stop and ask the user.
+Local Git workflow issues
 
-## Preflight and task claim
-- If you cannot complete preflight, stop and ask.
-- The claim must be merged into main and visible on GitHub before any task work starts.
-- If the claim is not visible, stop and ask.
+1. git push origin HEAD:main fails during a claim
+   1. Another agent pushed first.
+   2. Run git fetch origin and git rebase origin/main.
+   3. If rebase conflicts in Docs/TODO.md, run git rebase abort.
+   4. Re read Docs/TODO.md and choose a different available task.
 
-## Task selection
-- Only use the top-to-bottom scan rule in Docs\TODO.md.
-- Do not run searches or extra commands to find tasks.
+2. git worktree add fails
+   1. Target directory exists and is not empty.
+   2. Branch name already exists.
 
-## Build and tests
-- Use MSBuild only.
-- Do not run CMake. If `build\DropletAnalyzer.sln` is missing, stop and ask.
-- Run only the tests required by the task.
+3. Main does not look up to date in an agent worktree
+   1. Do not git switch main in a worktree.
+   2. Always sync with git fetch origin and git rebase origin/main.
 
-## Test artifacts and cleanup
-- Prefer tests that write to a temp path and delete files in teardown.
-- Do not both modify tests and add .gitignore entries for the same artifact.
-- Do not delete files unless instructed.
+Build and test issues
 
-## Missing tools or paths
-- If a required tool or path is missing, stop and ask before searching or installing.
+1. MSB8020 toolset mismatch
+   1. Retarget to the installed toolset.
+
+2. Unit test failure
+   1. Treat as regression.
+   2. Fix before merging.
+
+If still blocked
+
+Stop. Ask the user with
+
+1. The task you were doing.
+2. The exact command.
+3. The full output.
+4. What you already tried.

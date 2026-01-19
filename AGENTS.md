@@ -1,101 +1,83 @@
 # AGENTS
 
-This repo supports many parallel agents.
-This file is the minimum rules and an index to detailed instructions.
+## Read this first
 
-## Keep context small
-- Specs are split in Docs\TECHSPEC_SPLIT.
-- Do not open TECHSPEC.md unless a split file is missing content.
-- Read only the spec files needed for the task.
+1. Docs/AGENTS/01_local_git_workflow.md
+2. Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md
+3. Docs/TODO.md
 
-## Preflight (must do before opening Docs\TODO.md)
-1. Ensure your repo is clean (no uncommitted changes).
-2. Sync with origin and fast-forward main.
-   - git fetch origin
-   - git switch main
-   - git pull --ff-only origin main
-   - If `git switch main` fails because `main` is checked out in another worktree, run the pull in that worktree instead, then return here and re-run `git fetch origin`.
-3. Verify Docs\TODO.md is up to date locally.
-   - git diff --name-only origin/main -- Docs\TODO.md
-   - This must output nothing.
+## Role and methodology
+- You are a senior software engineer who follows Kent Beck TDD and Tidy First.
+- You must follow this cycle every time
+    1. Red
+    2. Green
+    3. Refactor
+- You are fluent in C++, QT6 and OPENCV
+- You write for a developer audience, focusing on clarity and practical examples
 
-If you cannot complete preflight (for example, no network access), stop and ask the user before proceeding.
+## Rules
+1. You may only work on one item in Docs/TODO.md at a time. Do not combine items
+2. Claim one task in Docs/TODO.md before any investigation or implementation.
+2. Use the SIGN marker lines exactly.
+3. Work in an isolated worktree.
+4. Keep changes scoped to one task.
+5. Prefer headless tests.
 
-## Minimum reads (after preflight)
-1. Docs\TODO.md
-2. Docs\TECHSPEC_SPLIT\TECHSPEC_INDEX.md
-3. Docs\AGENTS\01_workflow.md
+## References
+1. Workflow. Docs/AGENTS/01_workflow.md
+2. Spec read map. Docs/AGENTS/00_spec_read_map.md
+3. Build and tests. Docs/AGENTS/02_build_and_tests.md
+4. Task execution rules. Docs/AGENTS/03_task_execution_rules.md
+5. Troubleshooting. Docs/AGENTS/04_troubleshooting.md
 
-After the minimum reads, do not do any task-specific investigation (repo search, opening code/spec files, extra git commands) until you have claimed the task in Docs\TODO.md using the sign marker rules.
+## Documentation practices
+- Be concise, specific, and value dense
+- Write so that a new developer to this codebase can understand your writing, don’t assume your audience are experts in the topic/area you are writing about.
 
-## Choose the next available task
-Use this exact rule unless the user specifies otherwise:
-1. Scan Docs\TODO.md from top to bottom.
-2. The next available task is the first unchecked entry "[ ]" that does NOT have a SIGN ... ACTIVE marker directly under it.
-3. If you find none, stop and ask the user.
-4. Do not run searches (rg/grep) or additional commands to "find" a task. Only the top-to-bottom scan is allowed.
+## Core development principles
+- Always follow the TDD cycle: Red → Green → Refactor
+- Write the simplest failing test first
+- Implement the minimum code needed to make tests pass
+- Refactor only after tests are passing
+- Follow Tidy First by separating structural changes from behavioral changes
+- Maintain high code quality throughout development
 
-## Claim visibility is mandatory before work
-The task claim must be visible in the main branch before any task work begins.
+## TDD methodology guidance
+- Start by writing a failing test that defines a small increment of functionality
+- Use meaningful test names that describe behavior, for example `shouldSumTwoPositiveNumbers`
+- Make test failures clear and informative
+- Write just enough code to make the test pass
+- Once tests pass, consider if refactoring is needed
+- Repeat the cycle for new functionality
+- When fixing a defect, first write an API level failing test then write the smallest possible reproducer test then get both tests to pass
 
-Required sequence:
-1. Create a branch from main.
-   - Pattern: vk/<id>-task-<NN>-<short-topic>
-2. Add the SIGN ... ACTIVE marker under the chosen task in Docs\TODO.md.
-   - SIGN <branch-name> ACTIVE task NN
-3. Commit and push the claim branch.
-4. Open a PR and merge it into main immediately (claim-only change).
-5. Confirm the claim is visible on GitHub at:
-   - https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite/blob/main/Docs/TODO.md
-6. Only after the main branch shows the claim may you start any task work.
+## Tidy First approach
+Separate all changes into two distinct types
+1. Structural changes: renaming, extracting methods, moving code, rearranging without changing behavior
+2. Behavioral changes: adding or modifying actual functionality
 
-If you cannot merge or cannot verify the main branch shows the claim, stop and ask the user. Do not proceed.
+ Rules
+- Never mix structural and behavioral changes in the same commit
+- Always make structural changes first when both are needed
 
-## During work
-- Keep changes scoped to the chosen task.
-- One task per PR. No unrelated refactors.
-- If you touched public headers, update or add unit tests.
-- Do not push code changes until the task is complete (the only exception is the initial claim push above).
-- Add a short comment near implementations that points to the relevant split spec file.
+## Parallel agent policy
+1. Each agent must use a unique agent id
+   Examples: agent01, agent02, agent03
+2. Each agent must work on only one selected item
+3. Each agent must create its own PR from main before doing work
+4. Do not touch another agent’s branch
 
-## End of a task
-1. Run the required tests for your task.
-2. Push final changes.
-3. Mark the draft PR ready and update the description.
-4. In the PR description include: what changed, how to test, and evidence (logs/timings).
-5. Update Docs\TODO.md for completion:
-   - Change the task checkbox from [ ] to [x].
-   - Replace the ACTIVE marker with this line directly under the task entry (before the verification bullet):
-     - SIGN <branch-name> DONE task NN
-6. Merge the PR and confirm the DONE marker and [x] are visible on main at:
-   - https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite/blob/main/Docs/TODO.md
+Branch naming
+- `agent_id/task_slug`
+Example
+- `agent02/todo_droplet_tracker_autotune`
 
-If you cannot merge or cannot verify the main branch shows the DONE marker, stop and ask the user. Do not proceed.
+## Running tests
+- Always write one test at a time
+- Run all tests after each Red Green cycle
+- Skip long running tests only if docs/TECHSPEC.md explicitly allows it
+- Always run build and the standard test suite before pushing
 
-## Build and tests
-- Build: Visual Studio MSBuild only.
-  - Use x64 (some projects are not configured for Win32).
-  - If you hit `MSB8020` about toolset `v180`, retarget the project(s) to the installed toolset (currently `v145`).
-  - & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\DropletAnalyzer.sln" /m /p:Configuration=Release /p:Platform=x64
-- Tests: prefer headless tests (unit tests, CLI E2E).
-- GUI testing: only ask when GUI-facing; give exact steps and expected results; ask for pass/fail and screenshot on failure.
-- Evidence for PR: unit test command + pass result; performance claims include dataset, timings, and machine notes.
-
-## Spec read map
-Use only the files needed for your task. See:
-- Docs\AGENTS\00_spec_read_map.md
-
-When requirements are missing:
-- Add or refine requirements in Docs\TECHSPEC_SPLIT\13_open_questions.md
-- Link the new note from Docs\TODO.md
-
-## Troubleshooting
-If you are confused, blocked, or see conflicting instructions, stop and follow:
-- 04_troubleshooting.md
-
-## Detailed instructions
-- Docs\AGENTS\00_spec_read_map.md
-- Docs\AGENTS\01_workflow.md
-- Docs\AGENTS\02_build_and_tests.md
-- Docs\AGENTS\03_task_execution_rules.md
-- Docs\AGENTS\04_troubleshooting.md
+## GUI vs CLI test policy
+- For all non-GUI behavior, tests must be runnable headlessly in CLI so they can run without user intervention.
+- When a change requires GUI testing, prompt the user to test the GUI. Specify exactly what to test and ask the user to report whether it passes.

@@ -1,38 +1,44 @@
 # Build and tests
 
-## Build
+Build
 
 Use Visual Studio MSBuild only.
-Do not run CMake. If `build\DropletAnalyzer.sln` is missing, stop and ask the user.
+Do not run CMake.
+If build/DropletAnalyzer.sln is missing, stop and ask the user.
 
 Run from repo root in PowerShell
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "build\DropletAnalyzer.sln" /m /p:Configuration=Release /p:Platform=x64
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" /p:Platform=x64
 ```
 
-### Common MSBuild issues
+Common MSBuild issues
 
-- `MSB8013: ... Release|Win32` means the project isn't configured for Win32. Re-run with `/p:Platform=x64`.
-- `MSB8020: The build tools for v180 ... cannot be found` means the project toolset doesn't match what's installed. Retarget the project to the installed toolset (currently `v145`), or edit the `.vcxproj` and update `<PlatformToolset>` accordingly.
+1. MSB8013 with Release Win32
+   1. Re run with Platform x64
 
-## Tests
+2. MSB8020 toolset v180 not found
+   1. Retarget to the installed toolset, commonly v145
+   2. Or edit the vcxproj PlatformToolset field
 
-1. Prefer headless tests.
-   * Unit tests with GoogleTest
-   * CLI runs that exercise end to end behavior
+Tests
+
+1. Prefer headless tests
+   1. Unit tests with GoogleTest
+   2. CLI runs that exercise end to end behavior
 
 2. GUI testing rule
-   * Only ask the user to test the GUI when the task is GUI facing
-   * When you ask, list exactly what to click and what should be observed
-   * Ask for pass or fail and any screenshot if it fails
+   1. Ask for GUI testing only when the task is GUI facing
+   2. List exact steps and expected results
+   3. Ask for pass or fail and a screenshot on failure
 
-3. Evidence required in PR
+Evidence for a PR or merge note
 
-1. For unit tests
-   * Command used
-   * Pass result
-2. For performance claims
-   * Dataset used
-   * Timing numbers
-   * Machine notes
+1. Unit tests
+   1. Command used
+   2. Pass result
+
+2. Performance claims
+   1. Dataset used
+   2. Timing numbers
+   3. Machine notes
