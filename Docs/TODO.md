@@ -64,14 +64,14 @@
     -   Follow-up fixes: commits 63cd1b9, a67a8fc, PR 15 (merged as 900e562)
 10. [ ] Configure `spdlog` for file and console logging. [IN-PROGRESS: agent10]
     -   **Verification:** A test application using `spdlog` successfully writes messages to both a specified log file and the console output. Log levels are configurable.
-11. [ ] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`).
+11. [ ] Define build-time option for DCAM SDK presence (`WITH_DCAM_SDK`). [IN-PROGRESS: agent11]
     -   **Verification:** A test build with `WITH_DCAM_SDK=OFF` successfully compiles, and the resulting binary does not contain any DCAM-related symbols. A separate test build with `WITH_DCAM_SDK=ON` (assuming SDK is present) successfully compiles and includes DCAM symbols.
-12. [ ] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`.
+12. [ ] Add build targets: `DropletAnalyzer` (app), `libdroplet` (static library), and `droplet_analyzer_tests`. [IN-PROGRESS: agent12]
     -   **Verification:** Running `cmake --build .` successfully generates `libdroplet.lib`, `DropletAnalyzer.exe`, and `droplet_analyzer_tests.exe` (or platform equivalents).
 
 **Core Interfaces and Data Models**
 
-13. [ ] Implement `InputSource` abstract base class (`include/InputSource.h`).
+13. [ ] Implement `InputSource` abstract base class (`include/InputSource.h`). [IN-PROGRESS: agent13]
     -   **Verification:** A derived dummy class can be instantiated and implements all pure virtual functions defined in `InputSource`. Unit tests ensure `getType()`, `getTotalFrames()`, `getFrame()`, and `getTimestamp()` signatures are correctly defined.
 14. [ ] Implement `IAnalysisModule` abstract base class (`include/IAnalysisModule.h`).
     -   **Verification:** A derived dummy class can be instantiated. Unit tests confirm `getName()`, `getDisplayName()`, `configure()`, `run()`, `createControlPanel()`, and `exportResults()` signatures are correctly defined.
