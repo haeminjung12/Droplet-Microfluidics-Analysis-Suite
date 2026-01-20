@@ -17,7 +17,7 @@
 
 ## Rules
 1. You may only work on one item in Docs/TODO.md at a time. Do not combine items
-2. Claim one task in Docs/TODO.md before any investigation or implementation.
+2. Claim the first incomplete task in Docs/TODO.md before any investigation or implementation.
 2. Use the SIGN marker lines exactly.
 3. Work in an isolated worktree.
 4. Keep changes scoped to one task.
