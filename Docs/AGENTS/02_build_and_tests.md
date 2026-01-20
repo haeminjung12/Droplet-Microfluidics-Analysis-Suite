@@ -5,6 +5,8 @@ Build
 Use Visual Studio MSBuild for builds.
 Run CMake only to regenerate build files (e.g., when adding/removing targets or source files).
 If build/DropletAnalyzer.sln is missing, run CMake to generate it.
+If `cmake` is not on PATH, use the Visual Studio CMake:
+`C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe`.
 
 Run from repo root in PowerShell
 
