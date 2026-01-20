@@ -15,6 +15,8 @@ struct FluorescenceMetrics {
     float bg_corrected_mean = 0.0F;
     float sbr = 0.0F;
     std::string bg_method;
+    bool bg_corrected_negative_flag = false;
+    bool saturated_flag = false;
 };
 
 struct Detection {
