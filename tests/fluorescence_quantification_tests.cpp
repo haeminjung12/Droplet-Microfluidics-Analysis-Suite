@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+#include <opencv2/imgproc.hpp>
+
 #include <cmath>
 
 namespace {
