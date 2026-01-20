@@ -4,6 +4,7 @@
 add_library(libdroplet STATIC
     dummy.cpp
     BackgroundSubtraction.cpp
+    DropletDetection.cpp
     FluorescenceQuantification.cpp
     HashUtils.cpp
     MathUtils.cpp

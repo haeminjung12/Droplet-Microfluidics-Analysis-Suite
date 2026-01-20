@@ -2,6 +2,7 @@ add_executable(droplet_analyzer_tests
     analysis_results_test.cpp
     background_subtraction_tests.cpp
     data_models_test.cpp
+    droplet_detection_tests.cpp
     fluorescence_quantification_tests.cpp
     hash_utils_tests.cpp
     input_source_signatures_test.cpp
