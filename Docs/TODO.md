@@ -139,6 +139,7 @@ Quick links
         2.  The area, circularity, and centroid of each detected droplet are within a 5% tolerance of the known ground truth.
         3.  Noise added to the image (e.g., salt-and-pepper) does not lead to spurious detections.
 23. [ ] Implement fluorescence quantification logic: local annulus and global ROI background correction, SBR computation.
+    SIGN agent03/todo_fluorescence_quantification ACTIVE task 23
     -   **Verification:**
         -   **Mean/Integrated:** Unit test with a synthetic image (e.g., a known grayscale value within a mask). Assert that mean/integrated values match expectations.
         -   **Local Annulus:** Unit test with a synthetic image of a fluorescent droplet (high intensity center) surrounded by a dimmer background. The annulus should be defined in the dimmer region. Assert that `bg_corrected_mean` is calculated correctly. Test edge case where annulus is too small/intersects other droplets; verify "failed" `bg_method` is set.
