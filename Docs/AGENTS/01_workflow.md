@@ -15,12 +15,6 @@ Concepts
 
 One time setup
 
-1. Create a local bare origin
-
-```bash
-git clone --bare https://github.com/haeminjung12/Droplet-Microfluidics-Analysis-Suite.git C:\repos\droplet-suite.origin
-```
-
 2. Create a master clone that uses the local origin
 
 ```bash

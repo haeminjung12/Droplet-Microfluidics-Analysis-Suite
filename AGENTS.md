@@ -2,7 +2,7 @@
 
 ## Read this first
 
-1. Docs/AGENTS/01_local_git_workflow.md
+1. Docs/AGENTS/01_workflow.md
 2. Docs/TECHSPEC_SPLIT/TECHSPEC_INDEX.md
 3. Docs/TODO.md
 
