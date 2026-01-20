@@ -133,8 +133,8 @@ Quick links
         -   **"None"**: Unit test runs background subtraction with "None" mode on a test image; output image is identical to input.
         -   **"Static"**: Unit test uses a synthetic image stack where a constant background is present over a moving foreground object. "Static" mode with N=50 frames should produce a clear background image (median) that accurately represents the constant background, subtracting the moving object.
         -   **"Running"**: Unit test feeds a synthetic video sequence (e.g., a white square moving over a dark background) into the "Running" background mode with a small alpha. The background should gradually converge to the dark background, leaving only the moving square as foreground.
-22. [ ] Implement core droplet detection pipeline: Gaussian blur, adaptive threshold, morphology, contour finding.
-    SIGN agent01/todo_droplet_detection_pipeline ACTIVE task 22
+22. [x] Implement core droplet detection pipeline: Gaussian blur, adaptive threshold, morphology, contour finding.
+    SIGN agent01/todo_droplet_detection_pipeline DONE task 22
     -   **Verification:** A test suite uses synthetic images containing known, perfectly circular droplets (e.g., 5 circles of 10px radius on a dark background). The detection pipeline is applied. The test asserts that:
         1.  The number of detected contours matches the known number of droplets.
         2.  The area, circularity, and centroid of each detected droplet are within a 5% tolerance of the known ground truth.
